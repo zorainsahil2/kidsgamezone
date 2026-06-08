@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.7.0"
+    },
+    "admin/*.php": {
+      "runtime": "vercel-php@0.7.0"
+    },
+    "admin/api/*.php": {
+      "runtime": "vercel-php@0.7.0"
+    },
+    "generate-sitemap.php": {
+      "runtime": "vercel-php@0.7.0"
+    },
+    "sitemap.php": {
+      "runtime": "vercel-php@0.7.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(config|admin/includes|database|data)/.*",
+      "status": 403,
+      "dest": "/index.html"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "/sitemap.php"
+    }
+  ]
+}

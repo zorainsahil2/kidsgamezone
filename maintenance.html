@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="60"> <!-- Auto-refresh every 60 seconds -->
+    <title>Under Maintenance - KidsGameZone</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --bg: #FFF9F0;
+            --card-bg: #FFFFFF;
+            --text: #2D3748;
+            --text-light: #718096;
+            --border-style: 3px solid #2D3748;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .maintenance-card {
+            background: var(--card-bg);
+            border: var(--border-style);
+            border-radius: 20px;
+            box-shadow: 0 10px 0px var(--text);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-width: 150px;
+            max-height: 70px;
+            object-fit: contain;
+            border: 2px solid var(--text);
+            border-radius: 8px;
+            padding: 5px;
+            background: #FFFBF4;
+        }
+
+        .logo-placeholder {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            text-shadow: 1px 1px 0px var(--text);
+            -webkit-text-stroke: 1px var(--text);
+        }
+
+        h1 {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            border: 2px solid var(--text);
+            color: var(--text);
+            font-weight: 800;
+            padding: 8px 18px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 0px var(--text);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="maintenance-card">
+        <div class="logo-container" id="logoBox">
+            <!-- Site name fallback loads if image fails -->
+            <div class="logo-placeholder" id="logoText">🎮 KidsGameZone</div>
+        </div>
+        
+        <h1>🔧 We'll be right back!</h1>
+        <p id="siteMessage">KidsGameZone is currently under maintenance. We are updating the portal with new games and improvements!</p>
+        
+        <div class="badge">🔨 UNDER MAINTENANCE</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load custom name and custom logo if available from public settings API
+            fetch('api/get-public-settings.php')
+                .then(res => res.json())
+                .then(settings => {
+                    // Redirect back to home if maintenance mode is off
+                    if (settings.maintenance_mode === '0') {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    if (settings.site_name) {
+                        document.title = `Under Maintenance - ${settings.site_name}`;
+                        document.getElementById('logoText').innerText = `🎮 ${settings.site_name}`;
+                        document.getElementById('siteMessage').innerText = `${settings.site_name} is currently under maintenance. We are updating the portal with new games and improvements!`;
+                    }
+
+                    if (settings.logo_path && settings.logo_path.trim() !== '') {
+                        const logoBox = document.getElementById('logoBox');
+                        logoBox.innerHTML = `<img src="${settings.logo_path}" alt="Logo" class="logo-img" onerror="showFallbackText()">`;
+                    }
+                })
+                .catch(err => console.error(err));
+        });
+
+        function showFallbackText() {
+            const logoBox = document.getElementById('logoBox');
+            logoBox.innerHTML = `<div class="logo-placeholder">🎮 KidsGameZone</div>`;
+        }
+    </script>
+</body>
+</html>
