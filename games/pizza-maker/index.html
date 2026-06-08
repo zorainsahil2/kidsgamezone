@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pizza Maker - Cooking Master</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Pizza Maker</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | Order: <span id="orderCountVal">1</span>/5
+            </div>
+        </div>
+
+        <!-- Recipe Order Sheet + Timer -->
+        <div class="meta-row">
+            <div class="order-sheet">
+                <div class="sheet-title">Order Recipe:</div>
+                <div class="required-toppings" id="requiredToppingsText">Loading...</div>
+            </div>
+            <div class="timer-box">
+                Timer: <span id="timerVal">30</span>s
+            </div>
+        </div>
+
+        <!-- Assembly Arena -->
+        <div class="workspace">
+            <!-- Left Side Toppings Selection Panel -->
+            <div class="toppings-shelf">
+                <div class="shelf-item" data-topping="sauce" title="Tomato Sauce">🍅 Sauce</div>
+                <div class="shelf-item" data-topping="cheese" title="Mozzarella Cheese">🧀 Cheese</div>
+                <div class="shelf-item" data-topping="pepperoni" title="Pepperoni Pizza">🍕 Pepperoni</div>
+                <div class="shelf-item" data-topping="mushroom" title="Mushrooms">🍄 Mushroom</div>
+                <div class="shelf-item" data-topping="peppers" title="Green Bell Peppers">🫑 Pepper</div>
+                <div class="shelf-item" data-topping="olives" title="Black Olives">🫒 Olive</div>
+            </div>
+
+            <!-- Pizza Canvas Container -->
+            <div class="pizza-wrapper">
+                <canvas id="gameCanvas" width="300" height="300"></canvas>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="submit-action-row">
+                <button class="action-btn clear" id="clearBtn">🗑️ Reset</button>
+                <button class="action-btn serve" id="serveBtn">🛎️ Deliver Pizza</button>
+            </div>
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap a topping on the shelf, then tap the pizza base to place it!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Pizza Cooking Shop!</h2>
+                <p>Prepare delicious pizzas matching the custom orders!</p>
+                <p>Select toppings on the shelf and click inside the circular dough base to spread them. Deliver before the 30s timer runs out!</p>
+                <button id="startBtn" class="restart-btn">START COOKING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Shift Complete!</h2>
+                <p>You processed 5 pizza orders.</p>
+                <p>Final Score: <span id="failScoreVal">0</span> pts</p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

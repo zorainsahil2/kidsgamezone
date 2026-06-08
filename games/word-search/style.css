@@ -1,0 +1,307 @@
+/* Word Search Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e0f2fe 0%, #c0e8fc 100%);
+    color: #0c4a6e;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 580px;
+    margin: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px dashed #0284c7;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #0284c7;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #7dd3fc;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #f0f9ff;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.45rem;
+    color: #0284c7;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.score-display {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #b45309;
+}
+
+.game-sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Tabs */
+.level-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.level-btn {
+    padding: 6px 12px;
+    border: 2px solid #cbd5e1;
+    background: white;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.level-btn:hover {
+    background: #f8fafc;
+}
+
+.level-btn.active {
+    background: #0284c7;
+    color: white;
+    border-color: #0284c7;
+    box-shadow: 0 3px 0 #0369a1;
+}
+
+.timer-display {
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+/* Content Split Layout */
+.game-content-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.grid-side {
+    flex: 1.6;
+}
+
+.checklist-side {
+    flex: 1;
+    background: #f0f9ff;
+    border: 2px solid #bae6fd;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.checklist-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 0.95rem;
+    color: #0369a1;
+    border-bottom: 2px dashed #bae6fd;
+    padding-bottom: 4px;
+}
+
+.word-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    max-height: 280px;
+}
+
+.checklist-item {
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 4px 8px;
+    background: white;
+    border-radius: 6px;
+    border: 1.5px solid #e0f2fe;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #0369a1;
+    text-transform: uppercase;
+}
+
+.checklist-item.found {
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    text-decoration: line-through;
+}
+
+/* 10x10 Search Board Grid */
+.word-search-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 4px;
+    background: #bae6fd;
+    padding: 6px;
+    border-radius: 12px;
+    user-select: none;
+    touch-action: none;
+    box-sizing: border-box;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #0f172a;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.cell.selected {
+    background-color: #fef08a; /* Yellow dragging */
+    color: #a16207;
+}
+
+.cell.found {
+    background-color: #86efac; /* Green locked found */
+    color: #14532d;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0369a1;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #0284c7;
+    font-weight: 700;
+    text-align: center;
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #ea580c;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #9a3412;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #9a3412;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12, 74, 110, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #f0f9ff;
+    border: 4px solid #0284c7;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #0284c7;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0c4a6e;
+    margin: 8px 0;
+}
+
+/* Responsive elements */
+@media (max-width: 580px) {
+    .game-content-layout {
+        flex-direction: column;
+    }
+    .word-search-grid {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+}

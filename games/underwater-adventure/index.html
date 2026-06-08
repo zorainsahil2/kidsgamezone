@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Underwater Adventure - Swimmer & Collector</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Deep Sea Adventure</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <!-- Diver status bars -->
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">💚 HP</span>
+                <div class="progress-outer">
+                    <div id="hpBar" class="progress-inner hp-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">🫧 Oxygen</span>
+                <div class="progress-outer">
+                    <div id="oxygenBar" class="progress-inner oxygen-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Viewport -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="320"></canvas>
+        </div>
+
+        <!-- Virtual Mobile D-pad -->
+        <div class="mobile-dpad">
+            <button class="dpad-btn" id="btnUp">🔼 Up</button>
+            <div class="horizontal-group">
+                <button class="dpad-btn" id="btnLeft">◀️ Left</button>
+                <button class="dpad-btn" id="btnRight">▶️ Right</button>
+            </div>
+            <button class="dpad-btn" id="btnDown">🔽 Down</button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Deep Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Use Keyboard Arrows / WASD to swim! Catch bubbles (🫧) to refill oxygen!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Underwater Adventure! 🦈</h2>
+                <p>Swim deep to collect chests (🏴‍☠️), pearls (⚪), and coins (🪙)!</p>
+                <p>Catch air bubbles (🫧) to stay alive. Avoid dangerous jellyfish, mines, and sharks!</p>
+                <button id="startBtn" class="play-again-btn">START SWIM</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Game Over! 🌊</h2>
+                <p id="failMessage">Your oxygen ran out or a hazard got you!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Swim Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Number Puzzle - Merge to 2048</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Number Puzzle</div>
+            <div class="score-container">
+                <div class="score-box">Score<span id="scoreVal">0</span></div>
+                <div class="score-box best-box">Best<span id="highScoreVal">0</span></div>
+            </div>
+        </div>
+
+        <div class="game-sub-header">
+            <span class="game-intro">Join matching tiles to get the <strong>2048</strong> tile!</span>
+            <button id="restartBtn" class="action-btn">🔄 Restart</button>
+        </div>
+
+        <!-- The 4x4 Grid Board -->
+        <div class="board-wrapper" id="swipeArea">
+            <div class="grid-container" id="gridContainer">
+                <!-- 16 background grid cells -->
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            </div>
+            <div class="tile-container" id="tileContainer">
+                <!-- Active sliding tiles injected here -->
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Use Keyboard Arrow keys or Swipe on screen to slide numbers!</span>
+        </div>
+
+        <!-- Win Overlay -->
+        <div class="overlay" id="winOverlay">
+            <div class="overlay-content">
+                <h2>You Reached 2048! 🏆</h2>
+                <p>Awesome merge skills! Keep playing to go for a higher score?</p>
+                <div class="overlay-buttons">
+                    <button id="keepPlayingBtn" class="overlay-btn green-btn">Keep Playing</button>
+                    <button id="winRestartBtn" class="overlay-btn orange-btn">New Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Game Over! 😭</h2>
+                <p>No moves left on the board!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <button id="failRestartBtn" class="overlay-btn orange-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

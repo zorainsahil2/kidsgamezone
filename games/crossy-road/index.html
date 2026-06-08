@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Crossy Road Clone - grid Traffic Crosser</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Crossy Chicken</div>
+            <div class="score-board">
+                Steps: <span id="scoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="450" height="500"></canvas>
+            
+            <!-- Mobile Directional D-Pad Overlay -->
+            <div class="dpad-container">
+                <div class="dpad-btn up" id="btnUp">▲</div>
+                <div class="dpad-btn-row">
+                    <div class="dpad-btn left" id="btnLeft">◀</div>
+                    <div class="dpad-btn empty"></div>
+                    <div class="dpad-btn right" id="btnRight">▶</div>
+                </div>
+                <div class="dpad-btn down" id="btnDown">▼</div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Move: Arrow Keys or WASD. Click buttons on mobile screens! Avoid cars & water!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Crossy Chicken!</h2>
+                <p>Cross roads and rivers safely!</p>
+                <p>Hop onto wooden logs (🪵) to cross rivers. Dodge the zooming cars (🚘)!</p>
+                <button id="startBtn" class="restart-btn">START CROSSING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="winnerText">Splatted!</h2>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+/* Ice Cream Maker Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #4ECDC4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #4ECDC4;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-board {
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+/* Order Board */
+.order-container {
+    display: flex;
+    gap: 12px;
+    background-color: #2D3748;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #4a5568;
+    align-items: center;
+}
+
+.character-avatar {
+    font-size: 2.5rem;
+}
+
+.speech-bubble {
+    background-color: #fff;
+    color: #2D3748;
+    padding: 8px 12px;
+    border-radius: 12px;
+    position: relative;
+    flex-grow: 1;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #fff;
+}
+
+.bubble-title {
+    font-family: 'Fredoka', cursive;
+    color: #ff6b6b;
+    margin-bottom: 4px;
+}
+
+.order-recipe {
+    color: #2D3748;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+/* Ice Cream Assembly view */
+.assembly-area {
+    height: 140px;
+    background: radial-gradient(circle, #e2e8f0 0%, #cbd5e0 100%);
+    border-radius: 12px;
+    border: 3px solid #718096;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dynamic ice cream stacking classes */
+.ice-cream-glass {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100px;
+}
+
+/* Visual elements represented in CSS */
+.stacked-base {
+    width: 60px;
+    height: 44px;
+    background-color: #ecc94b; /* cone yellow-brown */
+    clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+    border-radius: 2px;
+    margin-bottom: -4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.stacked-base.cup {
+    background-color: #f687b3; /* pink cup */
+    clip-path: polygon(5% 0, 95% 0, 85% 100%, 15% 100%);
+}
+
+.stacked-scoop {
+    width: 66px;
+    height: 48px;
+    border-radius: 50% 50% 30% 30%;
+    margin-top: -12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: inset 0 6px 8px rgba(255,255,255,0.4);
+}
+
+.stacked-scoop.vanilla { background-color: #fffbeb; }
+.stacked-scoop.chocolate { background-color: #8d5b4c; }
+.stacked-scoop.strawberry { background-color: #f687b3; }
+.stacked-scoop.mint { background-color: #68d391; }
+
+.stacked-topping {
+    font-size: 1.5rem;
+    margin-top: -16px;
+    z-index: 2;
+}
+
+/* Ingredients Select Block */
+.ingredients-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-block {
+    background-color: #2D3748;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1.5px solid #4a5568;
+}
+
+.block-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: #FFE66D;
+    margin-bottom: 6px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+/* Flavor scoop grids adjustments (since base/flavor are different sizes) */
+.options-grid.two-cols {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ing-btn {
+    padding: 6px 3px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 8px;
+    border: 2px solid #718096;
+    background-color: #4a5568;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+    text-align: center;
+}
+
+.ing-btn:active {
+    transform: scale(0.95);
+}
+
+.ing-btn:hover {
+    border-color: #FFE66D;
+}
+
+/* Scoop button background colors */
+.ing-btn.vanilla { background-color: #fffbeb; color: #2d3748; }
+.ing-btn.chocolate { background-color: #8d5b4c; }
+.ing-btn.strawberry { background-color: #f687b3; }
+.ing-btn.mint { background-color: #68d391; color: #2d3748; }
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-action-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px;
+    width: 100%;
+}
+
+.action-btn {
+    padding: 10px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.15s;
+}
+
+.action-btn.clear { background-color: #e53e3e; }
+.action-btn.serve { background-color: #48bb78; }
+.action-btn:active { transform: scale(0.95); }
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #FFE66D;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 32, 44, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #2D3748;
+    border: 4px solid #4a5568;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #FFE66D;
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.overlay-content p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 8px 0;
+}

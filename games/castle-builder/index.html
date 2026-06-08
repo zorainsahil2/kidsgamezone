@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Castle Builder - Stack and Balance! 🏰</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Castle Builder</div>
+            <div class="score-display">✨ Blocks: <span id="scoreVal">0</span></div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="500"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Tower Height: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap screen or press Spacebar to drop the castle block! Keep it balanced!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Castle Builder! 🏰</h2>
+                <p>Drop swinging stone blocks to stack a massive castle tower!</p>
+                <p>Align the block carefully. Any overhang will be sliced off, making the block narrower!</p>
+                <p>Keep the balance. A complete miss means Game Over!</p>
+                <button id="startBtn" class="play-again-btn">START STACKING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Tower Collapsed! 💥</h2>
+                <p id="failMessage">You missed the stack!</p>
+                <p>Blocks Stacked: <span id="failScoreVal">0</span></p>
+                <p>Best Tower: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Build Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+/* Crossy Road Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 470px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #4ECDC4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #4ECDC4;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #FFE66D;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-board {
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background-color: #2f855a; /* Grass green by default */
+    border: 4px solid #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    display: block;
+}
+
+/* Mobile D-Pad button layouts */
+.dpad-container {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    opacity: 0.8;
+}
+
+.dpad-btn-row {
+    display: flex;
+    gap: 40px;
+}
+
+.dpad-btn {
+    width: 44px;
+    height: 44px;
+    background-color: rgba(26, 32, 44, 0.85);
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    user-select: none;
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+.dpad-btn:active {
+    background-color: #4a5568;
+    transform: scale(0.9);
+}
+
+.dpad-btn.empty {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #FFE66D;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background-color: #FF6B35;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #000;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #000;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 32, 44, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #2D3748;
+    border: 4px solid #4a5568;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #FFE66D;
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.overlay-content p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 8px 0;
+}

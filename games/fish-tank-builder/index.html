@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fish Tank Builder - Sandbox Aquarium</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Fish Tank Builder</div>
+            <div class="coin-display">🪙 Coins: <span id="coinCount">100</span></div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="350"></canvas>
+        </div>
+
+        <!-- Shop Panels -->
+        <div class="shop-panel">
+            <div class="shop-title">🐠 Buy Aquatic Friends</div>
+            <div class="shop-grid">
+                <button class="shop-item-btn" data-item="clownfish" data-cost="15">
+                    <span class="emoji">🐠</span> Clownfish <span class="cost">15</span>
+                </button>
+                <button class="shop-item-btn" data-item="blowfish" data-cost="25">
+                    <span class="emoji">🐡</span> Blowfish <span class="cost">25</span>
+                </button>
+                <button class="shop-item-btn" data-item="octopus" data-cost="40">
+                    <span class="emoji">🐙</span> Octopus <span class="cost">40</span>
+                </button>
+                <button class="shop-item-btn" data-item="squid" data-cost="50">
+                    <span class="emoji">🦑</span> Squid <span class="cost">50</span>
+                </button>
+                <button class="shop-item-btn" data-item="shark" data-cost="80">
+                    <span class="emoji">🦈</span> Shark <span class="cost">80</span>
+                </button>
+            </div>
+
+            <div class="shop-title" style="margin-top: 8px;">🐚 Decor & Plants</div>
+            <div class="shop-grid">
+                <button class="shop-item-btn" data-item="seaweed" data-cost="10">
+                    <span class="emoji">🌿</span> Seaweed <span class="cost">10</span>
+                </button>
+                <button class="shop-item-btn" data-item="coral" data-cost="20">
+                    <span class="emoji">🪸</span> Coral <span class="cost">20</span>
+                </button>
+                <button class="shop-item-btn" data-item="chest" data-cost="60">
+                    <span class="emoji">🪙</span> Chest <span class="cost">60</span>
+                </button>
+                <button id="clearBtn" class="clear-btn">🧹 Reset Tank</button>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Buy an item, then click inside the tank to place it! Pop bubbles (🫧) to get bonus coins! Click items to wiggle!</span>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

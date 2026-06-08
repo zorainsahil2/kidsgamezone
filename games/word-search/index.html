@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Word Search - Educational Word Finder</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Word Search</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">1000</span></div>
+        </div>
+
+        <div class="game-sub-header">
+            <!-- Level Selectors -->
+            <div class="level-tabs">
+                <button class="level-btn active" data-level="0">Level 1</button>
+                <button class="level-btn" data-level="1">Level 2</button>
+                <button class="level-btn" data-level="2">Level 3</button>
+            </div>
+            <div class="timer-display">⏳ Timer: <span id="timerVal">0</span>s</div>
+        </div>
+
+        <!-- Layout splits into Grid and Word Checklist -->
+        <div class="game-content-layout">
+            <div class="grid-side">
+                <div class="word-search-grid" id="searchGrid">
+                    <!-- 10x10 letter grid cells populated dynamically -->
+                </div>
+            </div>
+
+            <div class="checklist-side">
+                <div class="checklist-title">🔍 Find these words:</div>
+                <div class="word-checklist" id="wordChecklist">
+                    <!-- Word list items -->
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Click & drag or swipe across letters to highlight and find hidden words!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart level</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Word Search! 🔍</h2>
+                <p>Find the 8 hidden animal words hidden in the grid!</p>
+                <p>Words can be horizontal, vertical, or diagonal. Solve it as fast as you can to get a high score!</p>
+                <button id="startBtn" class="restart-btn">START SEARCH</button>
+            </div>
+        </div>
+
+        <!-- Complete Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>🎉 Puzzle Complete!</h2>
+                <p>Congratulations, you found all words!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

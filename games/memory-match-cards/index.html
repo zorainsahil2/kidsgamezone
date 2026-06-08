@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Memory Match - Brain Trainer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Memory Match</div>
+            <div class="score-board">
+                Moves: <span id="movesVal">0</span> | Score: <span id="scoreVal">0</span>
+            </div>
+        </div>
+
+        <!-- 4x4 Grid of Cards -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- Dynamically populated by JavaScript -->
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Moves Record: <span id="highScoreVal">--</span></div>
+            <span class="controls-hint">Tap two cards to find matching pairs! Fewer moves is better!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Win Overlay Modal -->
+        <div class="overlay" id="winOverlay">
+            <div class="overlay-content">
+                <h2>🎉 Congratulations!</h2>
+                <p>You matched all pairs in <span id="finalMovesVal">0</span> moves!</p>
+                <p>High Score (Min Moves): <span id="overlayHighScoreVal">--</span></p>
+                <button id="overlayRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

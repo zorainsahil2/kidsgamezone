@@ -1,0 +1,305 @@
+/* Alphabet Adventure Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); /* cyan light baby room */
+    color: #164e63;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #06b6d4;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #06b6d4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #a5f3fc;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #ecfeff;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.35rem;
+    color: #0891b2;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.score-display {
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+/* Progress dots tracker */
+.progress-bar-container {
+    overflow-x: auto;
+    padding: 2px 0;
+}
+
+.progress-track {
+    display: flex;
+    justify-content: space-between;
+    min-width: 400px;
+    gap: 3px;
+}
+
+.prog-dot {
+    width: 10px;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    border: 1px solid #cbd5e1;
+    font-size: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+}
+
+.prog-dot.passed {
+    background: #22c55e;
+    border-color: #15803d;
+}
+
+.prog-dot.active {
+    background: #eab308;
+    border-color: #a16207;
+    transform: scale(1.2);
+}
+
+/* Large Center Letter Display */
+.letter-display-box {
+    margin: 10px auto;
+    width: 110px;
+    height: 110px;
+    background: #e0f2fe;
+    border: 5px solid #0284c7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 12px rgba(2, 132, 199, 0.15);
+    animation: float 2.5s infinite ease-in-out;
+}
+
+.letter-display-box.bounce-success {
+    animation: bounce 0.4s ease-out;
+}
+
+.letter-display-box.shake-error {
+    animation: shake 0.4s ease-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+@keyframes bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#targetLetter {
+    font-family: 'Fredoka', cursive;
+    font-size: 4.5rem;
+    color: #0369a1;
+}
+
+/* Hint Block */
+.hint-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 48px;
+}
+
+.hint-btn {
+    padding: 4px 10px;
+    border: 1.5px solid #a5f3fc;
+    background: white;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #0891b2;
+    cursor: pointer;
+}
+
+.hint-text {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0369a1;
+    font-style: italic;
+}
+
+/* 4 choice picture cards grid */
+.choices-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.choice-card {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+    transition: all 0.15s ease;
+    outline: none;
+}
+
+.choice-card:hover {
+    border-color: #06b6d4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(6, 182, 212, 0.08);
+}
+
+.choice-card .emoji {
+    font-size: 2.8rem;
+    user-select: none;
+}
+
+.choice-card .label {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #1e293b;
+    text-transform: capitalize;
+}
+
+.choice-card.correct {
+    border-color: #22c55e;
+    background-color: #f0fdf4;
+}
+
+.choice-card.wrong {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0891b2;
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background-color: #0891b2;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #0e7490;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #0e7490;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 78, 99, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #ecfeff;
+    border: 4px solid #06b6d4;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #0891b2;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #164e63;
+    margin: 8px 0;
+}

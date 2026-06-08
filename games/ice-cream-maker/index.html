@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ice Cream Maker - Cooking Time</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Ice Cream Shop</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | Customer: <span id="customerCountVal">1</span>/5
+            </div>
+        </div>
+
+        <!-- Customer Order Card -->
+        <div class="order-container">
+            <div class="character-avatar" id="customerAvatar">👧</div>
+            <div class="speech-bubble">
+                <div class="bubble-title">I would like:</div>
+                <div class="order-recipe" id="orderRecipeText">Loading order...</div>
+            </div>
+        </div>
+
+        <!-- Assembly Area (visual mockup of active ice cream build) -->
+        <div class="assembly-area">
+            <div class="ice-cream-glass" id="activeIcecreamBuild">
+                <!-- Layers dynamically stacked here -->
+            </div>
+        </div>
+
+        <!-- Recipe Ingredient Buttons Grouped -->
+        <div class="ingredients-container">
+            <div class="category-block">
+                <div class="block-title">1. Base Container</div>
+                <div class="options-grid">
+                    <button class="ing-btn base-btn" data-type="base" data-val="waffle-cone">🍦 Waffle Cone</button>
+                    <button class="ing-btn base-btn" data-type="base" data-val="paper-cup">🍧 Paper Cup</button>
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="block-title">2. Ice Cream Scoops</div>
+                <div class="options-grid">
+                    <button class="ing-btn flavor-btn vanilla" data-type="scoop" data-val="vanilla">Vanilla</button>
+                    <button class="ing-btn flavor-btn chocolate" data-type="scoop" data-val="chocolate">Chocolate</button>
+                    <button class="ing-btn flavor-btn strawberry" data-type="scoop" data-val="strawberry">Strawberry</button>
+                    <button class="ing-btn flavor-btn mint" data-type="scoop" data-val="mint">Mint</button>
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="block-title">3. Toppings</div>
+                <div class="options-grid">
+                    <button class="ing-btn topping-btn" data-type="topping" data-val="sprinkles">✨ Sprinkles</button>
+                    <button class="ing-btn topping-btn" data-type="topping" data-val="chocolate-sauce">🍫 Sauce</button>
+                    <button class="ing-btn topping-btn" data-type="topping" data-val="cherry">🍒 Cherry</button>
+                    <button class="ing-btn topping-btn" data-type="topping" data-val="whipped-cream">🧁 Cream</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="submit-action-row">
+                <button class="action-btn clear" id="clearBtn">🗑️ Clear</button>
+                <button class="action-btn serve" id="serveBtn">🛎️ Serve Order</button>
+            </div>
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap ingredients in sequence to build the ice cream order, then tap SERVE!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Ice Cream Maker!</h2>
+                <p>Serve hungry customers with their favorite ice cream cones and cups!</p>
+                <p>Read customer speech bubbles carefully and stack the correct flavors and toppings.</p>
+                <button id="startBtn" class="restart-btn">OPEN SHOP</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Round Complete!</h2>
+                <p>You served 5 customers.</p>
+                <p>Final Score: <span id="failScoreVal">0</span> pts</p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

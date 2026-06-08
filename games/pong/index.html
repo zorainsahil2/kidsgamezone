@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pong Classic - Retro Arcade</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Pong Arcade</div>
+            <div class="score-board">
+                <span id="scoreL">0</span> - <span id="scoreR">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">AI Best Win-Streak: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">P1 (Left): W/S or Touch Drag. P2 (Right): Up/Down.</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Mode Select Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Pong Classic</h2>
+                <p>Select your gameplay mode:</p>
+                <div class="mode-select-btns">
+                    <button class="mode-btn" id="vsAiBtn">👤 Player vs AI</button>
+                    <button class="mode-btn" id="vsPlayerBtn">👥 2 Players Local</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Win Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="winnerText">Player 1 Wins!</h2>
+                <p>Final Score: <span id="finalScoreL">0</span> - <span id="finalScoreR">0</span></p>
+                <p id="streakText" class="streak-line" style="display:none;">AI Win Streak: <span id="streakVal">0</span></p>
+                <button id="overlayRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

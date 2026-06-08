@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dinosaur Egg Hatch - Tap to Hatch! 🦖</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Dino Hatchery</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">⏳ Time Left:</span>
+                <span id="timerVal" style="color: #4ade80; font-weight: bold; font-size: 1.1rem;">120s</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">🦖 Dinos Hatched:</span>
+                <span id="hatchCountVal" style="color: #a855f7; font-weight: bold;">0</span>
+            </div>
+        </div>
+
+        <!-- Egg Hatching Grid -->
+        <div class="grid-wrapper">
+            <div class="egg-grid">
+                <!-- Egg Nests (6 Total) -->
+                <div class="egg-card" onclick="tapEgg(0)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge0">🦖 T-Rex</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress0" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="egg-card" onclick="tapEgg(1)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge1">🦕 Stego</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress1" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="egg-card" onclick="tapEgg(2)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge2">🦖 Raptor</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress2" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="egg-card" onclick="tapEgg(3)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge3">🦕 Stego</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress3" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="egg-card" onclick="tapEgg(4)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge4">🦅 Ptero</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress4" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="egg-card" onclick="tapEgg(5)">
+                    <div class="egg-visual-container">
+                        <canvas class="egg-canvas" width="100" height="120"></canvas>
+                        <div class="hatch-badge" id="badge5">🦖 T-Rex</div>
+                    </div>
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress5" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Hatch Score: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap eggs rapidly to hatch baby dinosaurs! Look out for rare Golden Eggs (✨) for extra points!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Dino Egg Hatch! 🦖</h2>
+                <p>Welcome to the prehistoric hatchery! You have 2 minutes (120 seconds) to hatch as many baby dinosaurs as possible!</p>
+                <p>Tap eggs repeatedly to crack their shells. Hatching dinos grants +50 points!</p>
+                <p>Glow golden eggs grant a massive +200 points!</p>
+                <button id="startBtn" class="play-again-btn">START HATCHING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Time's Up! 🦕</h2>
+                <p>You successfully incubated and hatched many dinos!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Hatch Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

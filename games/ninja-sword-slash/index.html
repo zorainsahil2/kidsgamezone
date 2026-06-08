@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ninja Sword Slash - Action Runner! ⚔️</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Ninja Slash</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <!-- Life panel -->
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">❤️ Lives:</span>
+                <span id="livesVal" style="color: #ef4444; font-weight: bold; font-size: 1.1rem;">❤️❤️❤️</span>
+            </div>
+            <div class="status-item" id="powerupTimerContainer" style="opacity: 0;">
+                <span class="status-label" style="color: #eab308;">⚡ Golden Sword:</span>
+                <span id="powerupTimerVal" style="color: #eab308; font-weight: bold;">3.0s</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="320"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Slash Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap screen or press Spacebar to slash your sword! Defeat oncoming enemies!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Ninja Sword Slash! ⚔️</h2>
+                <p>Run fast and slash enemies with your ninja sword!</p>
+                <p>Defeat walking ninjas, jumping ninjas, and flying birds by timing your slash.</p>
+                <p>Score 100 points to unleash the <b>Golden Sword Power-up</b> for rapid automatically-boosted slashing!</p>
+                <button id="startBtn" class="play-again-btn">START RUN</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Defeated! 🩸</h2>
+                <p id="failMessage">An enemy struck you!</p>
+                <p>Enemies Slashed: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Run Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

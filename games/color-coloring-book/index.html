@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Coloring Book - Creative Paint Box</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Coloring Book</div>
+            <div class="tool-status">Mode: <span id="modeVal">🪣 Fill</span></div>
+        </div>
+
+        <!-- Tool & Actions Toolbar -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="tool-btn active" data-tool="fill" id="fillTool">🪣 Fill</button>
+                <button class="tool-btn" data-tool="brush" id="brushTool">🖌️ Brush</button>
+                <button class="tool-btn" data-tool="eraser" id="eraserTool">🧼 Eraser</button>
+            </div>
+            <div class="tool-group">
+                <button id="clearBtn" class="action-btn red-btn">🔄 Clear</button>
+                <button id="saveBtn" class="action-btn green-btn">💾 Save PNG</button>
+            </div>
+        </div>
+
+        <!-- Palette panel -->
+        <div class="palette-container">
+            <div class="palette-grid" id="paletteGrid">
+                <!-- 16 bright colors injected here -->
+            </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="350"></canvas>
+        </div>
+
+        <!-- Template Selector thumbnails strip -->
+        <div class="thumbnails-container">
+            <div class="thumb-title">Choose Picture:</div>
+            <div class="thumb-strip" id="thumbStrip">
+                <button class="thumb-btn active" data-pic="sun">☀️ Sun</button>
+                <button class="thumb-btn" data-pic="house">🏠 House</button>
+                <button class="thumb-btn" data-pic="flower">🌸 Flower</button>
+                <button class="thumb-btn" data-pic="fish">🐟 Fish</button>
+                <button class="thumb-btn" data-pic="butterfly">🦋 Butterfly</button>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Pick a color, choose a tool, and style your outline template picture!</span>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

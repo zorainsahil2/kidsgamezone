@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Whack-A-Mole - Reflex Blitz</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Whack-A-Mole</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | Time: <span id="timeVal">30</span>s
+            </div>
+        </div>
+
+        <!-- 3x3 Hole Grid -->
+        <div class="grid-container">
+            <div class="hole-card" data-index="0">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="1">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="2">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="3">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="4">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="5">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="6">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="7">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+            <div class="hole-card" data-index="8">
+                <div class="hole"></div>
+                <div class="mole"></div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap/Click moles when they pop up! Don't hit bombs (💣)!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Game Over Modal overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Time's Up!</h2>
+                <p>Final Score: <span id="finalScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="overlayRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Start Screen Modal overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Whack-A-Mole!</h2>
+                <p>Whack the moles (🐹) for 10pts.</p>
+                <p>Whack golden moles (✨) for 30pts!</p>
+                <p class="warn-text">Avoid whacking bombs (💣) (-20pts)!</p>
+                <button id="startBtn" class="restart-btn">START GAME</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Geometry Dash Clone - Rhythm Runner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Cube Runner</div>
+            <div class="score-board">
+                Level: <span id="levelVal">1</span>/3 | Progress: <span id="progressVal">0</span>%
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="300"></canvas>
+            <div class="level-indicator" id="lvlName">Level 1 - Neon Beginnings</div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Score Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap or press Spacebar to jump! Avoid spikes and gaps!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Cube Runner Dash!</h2>
+                <p>Timing is everything! Auto-run through spikes, platforms, and gaps.</p>
+                <p>Complete all 3 levels to secure the crown!</p>
+                <button id="startBtn" class="restart-btn">START RUN</button>
+            </div>
+        </div>
+
+        <!-- Level Cleared Overlay -->
+        <div class="overlay" id="levelWinOverlay">
+            <div class="overlay-content">
+                <h2>Level Cleared!</h2>
+                <p>Great reflexes! Completion Bonus: +500 pts</p>
+                <button id="nextLevelBtn" class="restart-btn">Next Level ➔</button>
+            </div>
+        </div>
+
+        <!-- Game Victory Overlay -->
+        <div class="overlay" id="gameWinOverlay">
+            <div class="overlay-content">
+                <h2>🏆 Champion!</h2>
+                <p>Unbelievable! You cleared all 3 neon levels!</p>
+                <p>Final Score: <span id="winScoreVal">0</span></p>
+                <p>High Score: <span id="winHighScoreVal">0</span></p>
+                <button id="winPlayAgainBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Crash Overlay -->
+        <div class="overlay" id="crashOverlay">
+            <div class="overlay-content">
+                <h2>Crashed!</h2>
+                <p>Spike hit! Attempt restarted.</p>
+                <button id="crashOkBtn" class="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

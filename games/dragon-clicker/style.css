@@ -1,0 +1,519 @@
+/* Dragon Clicker - KidsGameZone Stylesheet */
+
+:root {
+    --primary-color: #a855f7;    /* Cute Purple */
+    --secondary-color: #f43f5e;  /* Rose Pink */
+    --accent-color: #eab308;     /* Gold Yellow */
+    --bg-dark: #0f172a;          /* Slate Dark */
+    --bg-card: #1e293b;          /* Card Background */
+    --border-color: #d8b4fe;      /* Light Purple Border */
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #db2777 100%); /* Purple/Magenta fantasy gradient */
+    color: var(--text-light);
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 4px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--border-color);
+    padding: 5px 12px;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 0 var(--border-color);
+}
+
+.back-link:hover {
+    background: #faf5ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 var(--border-color);
+}
+
+.back-link:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--border-color);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #e9d5ff;
+    text-shadow: 2px 2px 0px #6b21a8;
+}
+
+.utility-btn {
+    background: #1e293b;
+    border: 2px solid #3b82f6;
+    color: white;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.utility-btn:hover {
+    background: #2563eb;
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: 10px;
+    background: #151e33;
+    padding: 10px;
+    border-radius: 16px;
+    border: 2px solid #334155;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid #273549;
+    padding-right: 8px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #c084fc;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    text-shadow: 1px 1px 0px #000;
+}
+
+.income-rate {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #4ade80;
+}
+
+.evolution-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding-left: 4px;
+}
+
+.evo-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.evo-label {
+    color: #e2e8f0;
+}
+
+.evo-label strong {
+    color: #f472b6;
+    font-family: 'Fredoka', cursive;
+}
+
+.evo-percent {
+    color: #fb7185;
+}
+
+.progress-outer {
+    height: 12px;
+    background: #1e293b;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #475569;
+}
+
+.progress-inner {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ec4899 0%, #a855f7 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+
+.evo-milestone {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-align: right;
+    font-weight: 700;
+}
+
+/* Canvas Wrapper */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas#gameCanvas {
+    width: 100%;
+    height: auto;
+    background: radial-gradient(circle at center, #2e1065 0%, #1e1b4b 70%, #030712 100%);
+    border: 4px solid var(--primary-color);
+    border-radius: 16px;
+    box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.4), 0 6px 20px rgba(0,0,0,0.5);
+    display: block;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.click-instructions {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #c084fc;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulseText 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Shop Panel */
+.shop-panel {
+    background: #131a2b;
+    border: 2px solid #2e1065;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.shop-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #e9d5ff;
+    border-bottom: 2px dashed #3b0764;
+    padding-bottom: 4px;
+    margin-bottom: 2px;
+}
+
+.upgrades-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.upgrade-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: #1e293b;
+    border: 2px solid #475569;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.upgrade-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: #a855f7;
+    background: #2d1b4e;
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25);
+}
+
+.upgrade-btn:not(:disabled):active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(168, 85, 247, 0.25);
+}
+
+.upgrade-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    background: #0f172a;
+    border-color: #1e293b;
+}
+
+.upgrade-btn:not(:disabled) {
+    animation: glowButton 2s infinite alternate;
+}
+
+@keyframes glowButton {
+    0% { box-shadow: 0 0 2px rgba(168, 85, 247, 0.2); }
+    100% { box-shadow: 0 0 8px rgba(168, 85, 247, 0.4); }
+}
+
+.upgrade-icon {
+    font-size: 1.6rem;
+    background: #3b0764;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+
+.upgrade-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.upgrade-name {
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: #f1f5f9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.upgrade-effect {
+    font-size: 0.65rem;
+    color: #a7f3d0;
+    font-weight: 700;
+}
+
+.upgrade-cost-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.upgrade-cost {
+    font-family: 'Fredoka', cursive;
+    color: #fde047;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.upgrade-owned {
+    font-size: 0.6rem;
+    color: #94a3b8;
+    font-weight: 800;
+}
+
+/* Footer Section */
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+}
+
+.footer-stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.high-score-line {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent-color);
+}
+
+.danger-btn {
+    background: #451a03;
+    border: 2px solid #b45309;
+    color: #fef3c7;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.danger-btn:hover {
+    background: #78350f;
+    color: #ffffff;
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #1e293b;
+    border: 4px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #d8b4fe;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin: 8px 0;
+}
+
+.play-again-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 0px #7c3aed;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.play-again-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #7c3aed;
+}
+
+/* Evolution Overlay Specifics */
+.evo-celebration h2 {
+    color: #fde047;
+    animation: flash 1s infinite alternate;
+}
+
+.evo-anim-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+canvas#evoCanvas {
+    background: radial-gradient(circle at center, #4c1d95 0%, #1e1b4b 100%);
+    border-radius: 50%;
+    border: 4px dashed #f43f5e;
+    animation: rotateBorder 12s linear infinite;
+}
+
+@keyframes rotateBorder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.evo-highlight {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.6rem;
+    color: #ec4899;
+    text-shadow: 0 0 10px rgba(236, 72, 153, 0.6);
+    margin: 10px 0;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes flash {
+    0% { text-shadow: 0 0 5px #fde047; }
+    100% { text-shadow: 0 0 20px #fbbf24, 0 0 30px #f59e0b; }
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 480px) {
+    .upgrades-list {
+        grid-template-columns: 1fr;
+    }
+    .stats-panel {
+        grid-template-columns: 1fr;
+    }
+    .stat-box {
+        border-right: none;
+        border-bottom: 2px solid #273549;
+        padding-right: 0;
+        padding-bottom: 8px;
+    }
+    .evolution-box {
+        padding-left: 0;
+        padding-top: 8px;
+    }
+    .game-container {
+        padding: 10px;
+    }
+}

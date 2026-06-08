@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tetris Puzzle Game</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Tetris</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | High: <span id="highScoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="game-body">
+            <!-- Grid Canvas -->
+            <canvas id="gameCanvas" width="240" height="480"></canvas>
+            
+            <!-- Side Panel showing lines, level, next block -->
+            <div class="side-panel">
+                <div class="panel-box">
+                    <div class="panel-label">Lines</div>
+                    <div id="linesVal" class="panel-val">0</div>
+                </div>
+                <div class="panel-box">
+                    <div class="panel-label">Level</div>
+                    <div id="levelVal" class="panel-val">1</div>
+                </div>
+                <div class="panel-box next-box">
+                    <div class="panel-label">Next</div>
+                    <canvas id="nextCanvas" width="80" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Arrows (Move/Rotate), Space (Drop). Swipes/Taps supported!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

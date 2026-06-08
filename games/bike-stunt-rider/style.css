@@ -1,0 +1,321 @@
+/* Bike Stunt Rider Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); /* deep night space */
+    color: #f1f5f9;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(30, 41, 59, 0.95);
+    border: 4px solid #f97316;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #f97316;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #fdba74;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #fff7ed;
+}
+
+.fullscreen-btn {
+    font-family: 'Fredoka', cursive;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #f97316;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #f97316;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-btn:hover {
+    background: #ea580c;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #f97316;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.lives-badge {
+    background: #ef4444;
+    border: 2px solid #ffffff;
+    color: white;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Level Tabs */
+.level-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.level-btn {
+    padding: 5px 10px;
+    border: 2px solid #475569;
+    background: #1e293b;
+    color: #94a3b8;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.level-btn:hover {
+    background: #334155;
+}
+
+.level-btn.active {
+    background: #f97316;
+    color: white;
+    border-color: #f97316;
+    box-shadow: 0 3px 0 #c2410c;
+}
+
+.score-display {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #f97316;
+}
+
+/* Canvas Area */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to bottom, #38bdf8 0%, #bae6fd 100%); /* sunny sky */
+    border: 4px solid #f97316;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    display: block;
+}
+
+/* Floating Stunt Text popup */
+.stunt-message {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-family: 'Fredoka', cursive;
+    font-size: 2.2rem;
+    color: #eab308;
+    text-shadow: 2px 2px 0px #000, 0 0 12px #fbbf24;
+    font-weight: bold;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.stunt-message.active {
+    animation: fadeOutUp 1.2s ease-out;
+}
+
+@keyframes fadeOutUp {
+    0% { opacity: 0; transform: translate(-50%, -20%) scale(0.5); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; transform: translate(-50%, -90%) scale(1); }
+}
+
+/* Mobile Controls button grids */
+.mobile-controls {
+    display: none; /* Hide on desktop */
+    justify-content: space-between;
+    gap: 20px;
+    background: #0f172a;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.drive-buttons, .tilt-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.ctrl-btn {
+    padding: 10px 14px;
+    border: 2px solid #334155;
+    background: #1e293b;
+    color: white;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+.ctrl-btn:active {
+    background: #f97316;
+    border-color: #f97316;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #f97316;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Overlays styling */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #1e293b;
+    border: 4px solid #f97316;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #f97316;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin: 8px 0;
+}
+
+.play-again-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background-color: #f97316;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #c2410c;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.play-again-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #c2410c;
+}
+
+/* Responsive show controls */
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+/* Fullscreen Mode Styling */
+.game-container:fullscreen, .game-container:-webkit-full-screen, .game-container:-moz-full-screen, .game-container:-ms-fullscreen {
+    max-width: 100vw !important;
+    width: 100% !important;
+    height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+    background: #0f172a !important;
+}
+
+.game-container:fullscreen .canvas-wrapper, .game-container:-webkit-full-screen .canvas-wrapper {
+    max-width: 800px;
+    width: 100%;
+}

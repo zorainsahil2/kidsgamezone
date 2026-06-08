@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Draw and Guess - Doodle Sandbox</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Draw & Guess</div>
+            <div class="timer-badge">⏳ <span id="timerVal">60</span>s</div>
+        </div>
+
+        <div class="score-row">
+            <div class="score-item">Score: <span id="scoreVal">0</span></div>
+            <div class="prompt-box">Draw this: <strong id="promptWord">Apple</strong></div>
+            <div class="score-item">Best: <span id="highScoreVal">0</span></div>
+        </div>
+
+        <!-- Tool panel -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="tool-btn active" data-tool="pencil" id="pencilTool">✏️ Draw</button>
+                <button class="tool-btn" data-tool="eraser" id="eraserTool">🧼 Eraser</button>
+            </div>
+            <!-- Brush sizes -->
+            <div class="tool-group">
+                <button class="size-btn" data-size="4" id="size-sm">S</button>
+                <button class="size-btn active" data-size="8" id="size-md">M</button>
+                <button class="size-btn" data-size="16" id="size-lg">L</button>
+            </div>
+            <div class="tool-group">
+                <button id="clearBtn" class="action-btn red-btn">🔄 Clear</button>
+            </div>
+        </div>
+
+        <!-- Palette panel -->
+        <div class="palette-container">
+            <div class="palette-grid" id="paletteGrid">
+                <!-- 16 colors -->
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="300"></canvas>
+        </div>
+
+        <!-- Gallery strip -->
+        <div class="gallery-container">
+            <div class="gallery-title">🎨 Your Session Gallery (Last 3):</div>
+            <div class="gallery-strip" id="galleryStrip">
+                <div class="empty-gallery">No drawings saved yet!</div>
+            </div>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Draw & Guess! 🎨</h2>
+                <p>You will get a prompt word. Try to draw it on the canvas in 60 seconds!</p>
+                <p>Click 👍 at the end if you drew it well, or 👎 to try again. Keep drawing to build your session score!</p>
+                <button id="startBtn" class="restart-btn">START DOODLING</button>
+            </div>
+        </div>
+
+        <!-- Self-Rating Overlay -->
+        <div class="overlay" id="ratingOverlay">
+            <div class="overlay-content">
+                <h2>Time's Up! ⏰</h2>
+                <p>Did you draw a good representation of: <strong id="ratingWord">Apple</strong>?</p>
+                <div class="rating-buttons">
+                    <button id="thumbsUpBtn" class="rate-btn green-btn">👍 Yes (+10 pts)</button>
+                    <button id="thumbsDownBtn" class="rate-btn red-btn">👎 No (Skip)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

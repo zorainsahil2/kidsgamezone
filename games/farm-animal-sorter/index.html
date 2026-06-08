@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Farm Animal Sorter - Sort and Learn! 🐄</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Animal Sorter</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">⏳ Time:</span>
+                <span id="timerVal" style="color: #4ade80; font-weight: bold; font-size: 1.1rem;">60s</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">🐾 Animal:</span>
+                <span id="progressVal" style="color: #60a5fa; font-weight: bold;">1 / 30</span>
+            </div>
+        </div>
+
+        <!-- Sorting Arena -->
+        <div class="arena-wrapper">
+            <!-- Animal Card -->
+            <div id="animalCard" class="animal-card">
+                <span id="animalEmoji" class="animal-emoji">🐄</span>
+                <span id="animalName" class="animal-name">COW</span>
+            </div>
+            
+            <!-- Result Banner (Wrong feedback) -->
+            <div id="feedbackBanner" class="feedback-banner">Wrong! A Cow lives in the Farm!</div>
+        </div>
+
+        <!-- 4 Bins at the bottom -->
+        <div class="bins-container">
+            <button class="bin-btn farm-bg" onclick="selectBin('Farm')">
+                <span class="bin-emoji">🐄</span>
+                <span class="bin-label">Farm</span>
+            </button>
+            <button class="bin-btn ocean-bg" onclick="selectBin('Ocean')">
+                <span class="bin-emoji">🌊</span>
+                <span class="bin-label">Ocean</span>
+            </button>
+            <button class="bin-btn jungle-bg" onclick="selectBin('Jungle')">
+                <span class="bin-emoji">🌿</span>
+                <span class="bin-label">Jungle</span>
+            </button>
+            <button class="bin-btn arctic-bg" onclick="selectBin('Arctic')">
+                <span class="bin-emoji">🏔️</span>
+                <span class="bin-label">Arctic</span>
+            </button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Sorting Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Tap one of the environment bins at the bottom to sort the animal in the card!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Farm Animal Sorter! 🐄</h2>
+                <p>Learn where animals live! Sort 30 animals into their correct environment bins:</p>
+                <p><b>🐄 Farm | 🌊 Ocean | 🌿 Jungle | 🏔️ Arctic</b></p>
+                <p>Correct sorting gives +10 points; incorrect takes -5 points. Maximize your accuracy within 60 seconds!</p>
+                <button id="startBtn" class="play-again-btn">START SORTING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Sorting Complete! 🎓</h2>
+                <p>Wonderful! Let's see your results:</p>
+                <p>Accuracy: <span id="accuracyVal" style="color: #4ade80; font-weight: bold;">0%</span></p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Sort Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

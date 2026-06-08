@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Space Invaders - Retro Space Shooter</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Space Invaders</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | Lives: <span id="livesVal">3</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="500"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Move Left/Right: A/D or Arrow keys. Shoot: Spacebar. On mobile, tap left/right side of screen to move, tap center to shoot!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Space Invaders</h2>
+                <p>Protect Earth from rows of invading aliens!</p>
+                <p>Dodge alien lasers, hide behind shields, and shoot them down before they reach the bottom!</p>
+                <button id="startBtn" class="restart-btn">LAUNCH MISSION</button>
+            </div>
+        </div>
+
+        <!-- Win Overlay -->
+        <div class="overlay" id="winOverlay">
+            <div class="overlay-content">
+                <h2>Victory!</h2>
+                <p>Earth is saved! You wiped out all alien invaders!</p>
+                <p>Final Score: <span id="winScoreVal">0</span></p>
+                <p>High Score: <span id="winHighScoreVal">0</span></p>
+                <button id="winPlayAgainBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Mission Failed!</h2>
+                <p>The invaders destroyed your ship or landed on Earth.</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

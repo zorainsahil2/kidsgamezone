@@ -1,0 +1,480 @@
+/* KidsGameZone Design System & Main Stylesheet */
+
+:root {
+  --primary: #FF6B35;      /* Bright orange */
+  --secondary: #4ECDC4;    /* Turquoise */
+  --accent: #FFE66D;       /* Yellow */
+  --purple: #A855F7;       /* Purple */
+  --bg: #FFF9F0;           /* Warm white */
+  --card-bg: #FFFFFF;
+  --text: #2D3748;
+  --text-light: #718096;
+  --border-radius: 16px;
+  --border-style: 4px solid #2D3748;
+  --shadow: 0 8px 0px #2D3748;
+  --shadow-hover: 0 14px 0px #2D3748;
+  --transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Category Badge Colors */
+.badge-color--platformer { background-color: #FF6B35; color: #FFFFFF; }
+.badge-color--arcade { background-color: #4ECDC4; color: #FFFFFF; }
+.badge-color--puzzle { background-color: #FFE66D; color: #2D3748; }
+.badge-color--racing { background-color: #EF4444; color: #FFFFFF; }
+.badge-color--action { background-color: #F43F5E; color: #FFFFFF; }
+.badge-color--memory { background-color: #3B82F6; color: #FFFFFF; }
+.badge-color--casual { background-color: #10B981; color: #FFFFFF; }
+.badge-color--educational { background-color: #8B5CF6; color: #FFFFFF; }
+.badge-color--creative { background-color: #EC4899; color: #FFFFFF; }
+.badge-color--strategy { background-color: #6B7280; color: #FFFFFF; }
+.badge-color--cooking { background-color: #F59E0B; color: #FFFFFF; }
+.badge-color--dress-up { background-color: #D946EF; color: #FFFFFF; }
+.badge-color--virtual-pet { background-color: #14B8A6; color: #FFFFFF; }
+.badge-color--sandbox { background-color: #84CC16; color: #FFFFFF; }
+.badge-color--rhythm { background-color: #6366F1; color: #FFFFFF; }
+.badge-color--idle { background-color: #06B6D4; color: #FFFFFF; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px), radial-gradient(var(--secondary) 1.5px, transparent 1.5px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Navigation */
+.portal-header {
+  background-color: var(--card-bg);
+  border-bottom: var(--border-style);
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .portal-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.portal-header__brand {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .portal-header__brand {
+    text-align: left;
+  }
+}
+
+.portal-header__logo {
+  font-family: 'Fredoka', cursive;
+  font-size: 2.2rem;
+  color: var(--primary);
+  text-shadow: 2px 2px 0px var(--text);
+  -webkit-text-stroke: 1.5px var(--text);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.portal-header__tagline {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-top: 5px;
+}
+
+/* Search Bar Component */
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 3px solid var(--text);
+  border-radius: 30px;
+  background: var(--bg);
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  background: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+}
+
+/* Main Layout Grid */
+.portal-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  flex-grow: 1;
+}
+
+@media (min-width: 1024px) {
+  .portal-layout {
+    flex-direction: row;
+    padding: 30px 40px;
+  }
+}
+
+.portal-sidebar {
+  width: 100%;
+  display: none; /* Hidden by default on mobile/tablet */
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+@media (min-width: 1280px) {
+  .portal-sidebar {
+    display: flex;
+    width: 180px;
+  }
+}
+
+.portal-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Ad Placement Containers */
+.ad-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.ad-slot--header {
+  max-width: 728px;
+  width: 100%;
+  min-height: 90px;
+  margin-top: 20px;
+}
+
+.ad-slot--sidebar {
+  position: sticky;
+  top: 140px;
+  align-self: flex-start;
+}
+
+.ad-slot--footer {
+  max-width: 728px;
+  width: 100%;
+  min-height: 90px;
+  margin-bottom: 20px;
+}
+
+/* Category Filter Tabs */
+.category-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 5px 0 15px 0;
+  scrollbar-width: thin;
+}
+
+.category-filters::-webkit-scrollbar {
+  height: 6px;
+}
+
+.category-filters::-webkit-scrollbar-thumb {
+  background-color: var(--text-light);
+  border-radius: 3px;
+}
+
+.category-tab {
+  padding: 10px 20px;
+  font-family: 'Fredoka', cursive;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  border: 3px solid var(--text);
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--text);
+  box-shadow: 0 4px 0px var(--text);
+  transition: var(--transition);
+  will-change: transform;
+}
+
+.category-tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0px var(--text);
+}
+
+.category-tab:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px var(--text);
+}
+
+.category-tab--active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 0px var(--text);
+}
+
+.category-tab--active:hover {
+  background-color: #FF8552;
+  box-shadow: 0 6px 0px var(--text);
+}
+
+/* Featured Section */
+.featured-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-heading {
+  font-family: 'Fredoka', cursive;
+  font-size: 1.8rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.featured-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 5px 20px 5px;
+  scrollbar-width: thin;
+}
+
+.featured-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.featured-row::-webkit-scrollbar-thumb {
+  background-color: var(--text-light);
+  border-radius: 4px;
+}
+
+/* Game Card Component (Standard & Featured) */
+.game-card {
+  background-color: var(--card-bg);
+  border: var(--border-style);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 320px;
+  will-change: transform;
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.game-card--featured {
+  flex: 0 0 280px; /* fixed width scroll items */
+}
+
+.game-card__media {
+  position: relative;
+  width: 100%;
+  padding-top: 66.67%; /* 3:2 Aspect Ratio */
+  background-color: #E2E8F0;
+  border-bottom: var(--border-style);
+}
+
+.game-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-card__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-family: 'Fredoka', sans-serif;
+  color: #FFFFFF;
+}
+
+.game-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 2px solid var(--text);
+  box-shadow: 2px 2px 0px var(--text);
+}
+
+.game-card__info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.game-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Nunito', sans-serif;
+}
+
+.game-card__button {
+  width: 100%;
+  padding: 10px;
+  font-family: 'Fredoka', cursive;
+  font-size: 1rem;
+  color: #FFFFFF;
+  background-color: var(--primary);
+  border: 2px solid var(--text);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 0px var(--text);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  margin-top: auto;
+}
+
+.game-card:hover .game-card__button {
+  background-color: #FF8552;
+}
+
+.game-card__button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px var(--text);
+}
+
+/* Grid Layout for Main Portal */
+.games-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .games-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+  }
+}
+
+.no-games-box {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 20px;
+  background-color: var(--card-bg);
+  border: var(--border-style);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.no-games-box__icon {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.no-games-box__text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* Footer Panel */
+.portal-footer {
+  background-color: var(--card-bg);
+  border-top: var(--border-style);
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.portal-footer__copyright {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.portal-footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.portal-footer__link {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.portal-footer__link:hover {
+  color: var(--primary);
+}

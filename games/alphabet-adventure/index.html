@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alphabet Adventure - Learn A-Z</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Alphabet Adventure</div>
+            <div class="score-display">⭐ First-Try: <span id="scoreVal">0</span>/26</div>
+        </div>
+
+        <!-- Progress Tracker dot bar -->
+        <div class="progress-bar-container">
+            <div class="progress-track" id="progressTrack">
+                <!-- dots dynamically loaded -->
+            </div>
+        </div>
+
+        <!-- Large Target Letter Banner -->
+        <div class="letter-display-box" id="letterBox">
+            <span id="targetLetter">A</span>
+        </div>
+
+        <!-- Hint block -->
+        <div class="hint-container">
+            <button id="hintBtn" class="hint-btn">💡 Show Hint</button>
+            <div class="hint-text" id="hintText"></div>
+        </div>
+
+        <!-- 4 choice pictures grid -->
+        <div class="choices-grid">
+            <button class="choice-card" data-idx="0" id="opt-0">
+                <span class="emoji">-</span>
+                <span class="label">-</span>
+            </button>
+            <button class="choice-card" data-idx="1" id="opt-1">
+                <span class="emoji">-</span>
+                <span class="label">-</span>
+            </button>
+            <button class="choice-card" data-idx="2" id="opt-2">
+                <span class="emoji">-</span>
+                <span class="label">-</span>
+            </button>
+            <button class="choice-card" data-idx="3" id="opt-3">
+                <span class="emoji">-</span>
+                <span class="label">-</span>
+            </button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <button id="restartBtn" class="restart-btn">🔄 Restart Course</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Alphabet Adventure! 🦖</h2>
+                <p>Learn letters A to Z by matching them with correct pictures!</p>
+                <p>Earn points for correct matches on your first attempt. Win by going through all 26 letters!</p>
+                <button id="startBtn" class="restart-btn">START ADVENTURE</button>
+            </div>
+        </div>
+
+        <!-- Win Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>👑 Alphabet Champion!</h2>
+                <p>Wonderful! You learned all letters A to Z!</p>
+                <p>Your Score: <span id="failScoreVal">0</span> / 26</p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span> / 26</p>
+                <button id="failRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

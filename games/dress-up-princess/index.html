@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Princess Dress Up - Fashion Sandbox</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Princess Dress Up</div>
+            <div class="sound-toggle" id="muteBtn">🔊</div>
+        </div>
+
+        <div class="game-content-layout">
+            <!-- Canvas Side -->
+            <div class="canvas-side">
+                <div class="canvas-wrapper">
+                    <canvas id="gameCanvas" width="400" height="500"></canvas>
+                </div>
+                <div class="action-buttons">
+                    <button id="randomBtn" class="action-btn purple-btn">🔀 Randomize</button>
+                    <button id="saveBtn" class="action-btn green-btn">📸 Save Photo</button>
+                    <button id="resetBtn" class="action-btn red-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Customizer Options Side -->
+            <div class="options-side">
+                <!-- Category Tabs -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-category="bg">🏰 BG</button>
+                    <button class="tab-btn" data-category="hair">💇‍♀️ Hair</button>
+                    <button class="tab-btn" data-category="top">👚 Top</button>
+                    <button class="tab-btn" data-category="bottom">👗 Skirt</button>
+                    <button class="tab-btn" data-category="shoes">👠 Shoes</button>
+                    <button class="tab-btn" data-category="acc">👑 Acc</button>
+                </div>
+
+                <!-- Scrollable Item Grid -->
+                <div class="items-container" id="itemsContainer">
+                    <!-- Javascript will populate items dynamically based on active category -->
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Tap categories and options to style your princess! Save your creation as a photo!</span>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

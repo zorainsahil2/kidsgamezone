@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tower Defense - Tactical Strategy</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Tactical Defense</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | Lives: <span id="livesVal">20</span>
+            </div>
+        </div>
+
+        <div class="dashboard-bar">
+            <span>Gold: 💰<span id="goldVal">100</span></span>
+            <span>Wave: ⚔️<span id="waveVal">0</span>/5</span>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <!-- Tower Store Panel -->
+        <div class="store-container" id="storePanel">
+            <div class="store-item active" data-tower="arrow">
+                <div class="tower-icon arrow-icon">🏹</div>
+                <div class="item-details">
+                    <span class="item-name">Arrow</span>
+                    <span class="item-cost">💰50</span>
+                </div>
+            </div>
+            <div class="store-item" data-tower="cannon">
+                <div class="tower-icon cannon-icon">💣</div>
+                <div class="item-details">
+                    <span class="item-name">Cannon</span>
+                    <span class="item-cost">💰80</span>
+                </div>
+            </div>
+            <div class="store-item" data-tower="freeze">
+                <div class="tower-icon freeze-icon">❄️</div>
+                <div class="item-details">
+                    <span class="item-name">Freeze</span>
+                    <span class="item-cost">💰70</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <button id="nextWaveBtn" class="restart-btn primary-btn">⚔️ Start Next Wave</button>
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Select a tower from the store, then click on any grass tile to place it!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Tactical Tower Defense</h2>
+                <p>Protect your castle from incoming monster waves!</p>
+                <p>Build defense towers along the grass sides. Defeating monsters earns you gold to buy more towers.</p>
+                <button id="startBtn" class="restart-btn">START GAME</button>
+            </div>
+        </div>
+
+        <!-- Win Overlay -->
+        <div class="overlay" id="winOverlay">
+            <div class="overlay-content">
+                <h2>🎉 Victory!</h2>
+                <p>You successfully defended the castle against all 5 waves!</p>
+                <p>Final Score: <span id="winScoreVal">0</span></p>
+                <p>High Score: <span id="winHighScoreVal">0</span></p>
+                <button id="winPlayAgainBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Defeat!</h2>
+                <p>Too many monsters breached your defense.</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dragon Clicker - Evolve Your Pet! 🐉</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <!-- Header -->
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Dragon Clicker</div>
+            <button id="muteBtn" class="utility-btn">🔊</button>
+        </div>
+
+        <!-- Scoreboard & Progression -->
+        <div class="stats-panel">
+            <div class="stat-box">
+                <div class="stat-label">🍗 Dragon Snacks</div>
+                <div class="stat-value" id="foodVal">0</div>
+                <div class="income-rate" id="incomeRateVal">+0/sec</div>
+            </div>
+            <div class="evolution-box">
+                <div class="evo-header">
+                    <span class="evo-label">Stage: <strong id="stageName">Egg</strong></span>
+                    <span class="evo-percent" id="evoPercent">0%</span>
+                </div>
+                <div class="progress-outer">
+                    <div id="evoProgressBar" class="progress-inner" style="width: 0%;"></div>
+                </div>
+                <div class="evo-milestone" id="evoMilestone">Next: 100 Snacks</div>
+            </div>
+        </div>
+
+        <!-- Main Click Area / Canvas Wrapper -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="480" height="320"></canvas>
+            <div class="click-instructions">Tap or Click the Dragon to feed it!</div>
+        </div>
+
+        <!-- Shop & Upgrades Panel -->
+        <div class="shop-panel">
+            <div class="shop-title">🏪 Dragon Care Shop</div>
+            <div class="upgrades-list">
+                <!-- Upgrade: Auto Feed -->
+                <button class="upgrade-btn" id="upgAutoFeed" disabled>
+                    <div class="upgrade-icon">🍃</div>
+                    <div class="upgrade-details">
+                        <div class="upgrade-name">Auto-Feeder</div>
+                        <div class="upgrade-effect">+1 snack/sec</div>
+                    </div>
+                    <div class="upgrade-cost-info">
+                        <div class="upgrade-cost">🍬 50</div>
+                        <div class="upgrade-owned">Owned: <span id="ownedAutoFeed">0</span></div>
+                    </div>
+                </button>
+
+                <!-- Upgrade: Treats -->
+                <button class="upgrade-btn" id="upgTreats" disabled>
+                    <div class="upgrade-icon">🍬</div>
+                    <div class="upgrade-details">
+                        <div class="upgrade-name">Dragon Treats</div>
+                        <div class="upgrade-effect">+5 per click</div>
+                    </div>
+                    <div class="upgrade-cost-info">
+                        <div class="upgrade-cost">🍬 200</div>
+                        <div class="upgrade-owned">Owned: <span id="ownedTreats">0</span></div>
+                    </div>
+                </button>
+
+                <!-- Upgrade: Spell -->
+                <button class="upgrade-btn" id="upgSpell" disabled>
+                    <div class="upgrade-icon">✨</div>
+                    <div class="upgrade-details">
+                        <div class="upgrade-name">Magic Spell</div>
+                        <div class="upgrade-effect">+10 snacks/sec</div>
+                    </div>
+                    <div class="upgrade-cost-info">
+                        <div class="upgrade-cost">🍬 500</div>
+                        <div class="upgrade-owned">Owned: <span id="ownedSpell">0</span></div>
+                    </div>
+                </button>
+
+                <!-- Upgrade: Friend -->
+                <button class="upgrade-btn" id="upgFriend" disabled>
+                    <div class="upgrade-icon">🐉</div>
+                    <div class="upgrade-details">
+                        <div class="upgrade-name">Dragon Friend</div>
+                        <div class="upgrade-effect">2x multiplier</div>
+                    </div>
+                    <div class="upgrade-cost-info">
+                        <div class="upgrade-cost">🍬 1,000</div>
+                        <div class="upgrade-owned">Owned: <span id="ownedFriend">0</span></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="game-footer">
+            <div class="footer-stats">
+                <span class="high-score-line">Most Snacks Ever: <span id="highScoreVal">0</span></span>
+            </div>
+            <div class="footer-buttons">
+                <button id="resetBtn" class="danger-btn">🔄 Reset Progress</button>
+            </div>
+        </div>
+
+        <!-- Overlays (Start/Info) -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Dragon Clicker! 🐉</h2>
+                <p>Welcome to your dragon sanctuary!</p>
+                <p>Click your dragon egg to hatch it. Feed your dragon snacks to help it evolve through 5 awesome stages!</p>
+                <p>Purchase Care Upgrades to automate and boost food production. Can you grow a Legendary Dragon?</p>
+                <button id="startBtn" class="play-again-btn">LET'S PLAY!</button>
+            </div>
+        </div>
+
+        <!-- Evolution Celebration Overlay -->
+        <div class="overlay" id="evoOverlay">
+            <div class="overlay-content evo-celebration">
+                <h2>✨ Dragon Evolved! ✨</h2>
+                <div class="evo-anim-wrapper">
+                    <canvas id="evoCanvas" width="200" height="200"></canvas>
+                </div>
+                <p>Congratulations! Your dragon has evolved into a</p>
+                <h3 id="evoNewStage" class="evo-highlight">Baby Dragon</h3>
+                <p>It can now generate more power and unlock new potentials!</p>
+                <button id="evoCloseBtn" class="play-again-btn">Awesome!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

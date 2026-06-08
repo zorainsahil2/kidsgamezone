@@ -1,0 +1,251 @@
+/* Underwater Adventure Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%); /* marine blue */
+    color: #e0f2fe;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 4px solid #06b6d4;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #06b6d4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #a5f3fc;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #ecfeff;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #06b6d4;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-display {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #eab308;
+}
+
+/* Status Panel */
+.status-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: #0f172a;
+    padding: 8px;
+    border-radius: 12px;
+    border: 2px solid #1e293b;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #38bdf8;
+    text-transform: uppercase;
+}
+
+.progress-outer {
+    flex: 1;
+    height: 12px;
+    background: #1e293b;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #334155;
+}
+
+.progress-inner {
+    height: 100%;
+    transition: width 0.15s ease;
+}
+
+.hp-bg { background-color: #10b981; }
+.oxygen-bg { background-color: #38bdf8; }
+
+/* Canvas */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background: radial-gradient(circle at center, #0ea5e9 0%, #0284c7 60%, #0369a1 100%); /* underwater cyan gradient */
+    border: 4px solid #0284c7;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    display: block;
+}
+
+/* Mobile Dpad Overlay */
+.mobile-dpad {
+    display: none; /* Hide on desktop */
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: #0f172a;
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.horizontal-group {
+    display: flex;
+    gap: 30px;
+}
+
+.dpad-btn {
+    padding: 8px 16px;
+    border: 2px solid #334155;
+    background: #1e293b;
+    color: white;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+}
+
+.dpad-btn:active {
+    background: #0284c7;
+    border-color: #0284c7;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #eab308;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Overlays styling */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #1e293b;
+    border: 4px solid #06b6d4;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #06b6d4;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin: 8px 0;
+}
+
+.play-again-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background-color: #06b6d4;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #0891b2;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.play-again-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #0891b2;
+}
+
+/* Show D-pad on touch viewports */
+@media (max-width: 768px) {
+    .mobile-dpad {
+        display: flex;
+    }
+}

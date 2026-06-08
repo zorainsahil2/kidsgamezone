@@ -1,0 +1,161 @@
+/* Candy Crush Match-3 Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 380px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #4ECDC4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #4ECDC4;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #FF6B6B;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-board {
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.grid-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: #2D3748;
+    padding: 10px;
+    border-radius: 16px;
+    border: 4px solid #4a5568;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
+
+/* 8x8 candy grid */
+.candy-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 6px;
+    aspect-ratio: 1; /* Keep square grid */
+}
+
+.candy-cell {
+    aspect-ratio: 1;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.6rem;
+    position: relative;
+    transition: transform 0.15s, background-color 0.15s;
+    user-select: none;
+}
+
+.candy-cell:active {
+    transform: scale(0.9);
+}
+
+.candy-cell.selected {
+    background-color: rgba(255, 230, 109, 0.25);
+    border: 2px dashed #FFE66D;
+    transform: scale(1.05);
+}
+
+/* Keyframe slide downs or match pops */
+@keyframes matchPop {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.candy-cell.pop {
+    animation: matchPop 0.25s forwards ease-out;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.combo-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #FFE66D;
+}
+
+.high-score-line {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #cbd5e0;
+}
+
+.controls-hint {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background-color: #FF6B35;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #000;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #000;
+}

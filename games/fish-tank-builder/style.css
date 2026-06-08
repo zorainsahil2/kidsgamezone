@@ -1,0 +1,206 @@
+/* Fish Tank Builder Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0284c7 0%, #075985 50%, #0c4a6e 100%);
+    color: #f0f9ff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0369a1;
+    border: 4px solid #38bdf8;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #0284c7;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #38bdf8;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #e0f2fe;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #0369a1;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.coin-display {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #d97706;
+    background: #fef3c7;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1.5px solid #f59e0b;
+    font-weight: bold;
+}
+
+/* Canvas styling */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    cursor: crosshair;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background: radial-gradient(circle at center, #38bdf8 0%, #0284c7 60%, #0369a1 100%);
+    border: 4px solid #0284c7;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    display: block;
+}
+
+/* Shop panels styling */
+.shop-panel {
+    background: #f0f9ff;
+    border: 2px solid #bae6fd;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.shop-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: #0369a1;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 6px;
+}
+
+.shop-item-btn {
+    padding: 8px 4px;
+    border: 2px solid #cbd5e1;
+    background: #ffffff;
+    color: #475569;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: all 0.15s ease;
+    position: relative;
+    user-select: none;
+}
+
+.shop-item-btn .emoji {
+    font-size: 1.4rem;
+}
+
+.shop-item-btn .cost {
+    font-size: 0.7rem;
+    color: #d97706;
+    background: #fef3c7;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.shop-item-btn:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+    box-shadow: 0 4px 8px rgba(3, 105, 161, 0.08);
+}
+
+.shop-item-btn.selected {
+    background: #bae6fd;
+    border-color: #0284c7;
+    color: #0369a1;
+    transform: scale(1.04);
+}
+
+.shop-item-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f1f5f9;
+}
+.shop-item-btn:disabled:hover {
+    transform: none;
+    border-color: #cbd5e1;
+    box-shadow: none;
+}
+
+.clear-btn {
+    grid-column: span 2;
+    background-color: #ef4444;
+    color: white;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.clear-btn:active {
+    transform: translateY(2.0px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.game-footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #0369a1;
+    font-weight: 700;
+    background: #e0f2fe;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 1.5px dashed #0284c7;
+}

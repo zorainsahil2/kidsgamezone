@@ -1,0 +1,128 @@
+/* Bella's Flower Run Stylesheet */
+
+:root {
+  --primary: #FF6B35;
+  --secondary: #4ECDC4;
+  --bg: #1a1a2e;
+  --card-bg: #162447;
+  --text: #ffffff;
+  --text-light: #e43f5a;
+  --border-style: 4px solid #162447;
+  --shadow: 0 8px 0px #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 820px;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: var(--card-bg);
+  border: 3px solid #1f4068;
+  border-radius: 12px;
+  box-shadow: 0 4px 0px #0f172a;
+}
+
+.back-link {
+  color: var(--primary);
+  font-family: 'Fredoka', cursive;
+  font-size: 1.1rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+  transform: scale(1.05);
+}
+
+.game-title {
+  font-family: 'Fredoka', cursive;
+  font-size: 1.5rem;
+  color: #ffb423;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.score-board {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  background: #000;
+  border: 4px solid #1f4068;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #70c5ce; /* fallback sky color */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.game-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8f94fb;
+  font-weight: bold;
+}
+
+/* Mobile responsive full viewport scaling */
+@media (max-width: 800px) {
+  body {
+    padding: 5px;
+    align-items: flex-start;
+  }
+  
+  .game-header {
+    padding: 6px 10px;
+  }
+
+  .game-title {
+    font-size: 1.1rem;
+  }
+
+  .score-board {
+    font-size: 0.85rem;
+  }
+
+  .canvas-wrapper {
+    border-radius: 8px;
+    border-width: 3px;
+  }
+}

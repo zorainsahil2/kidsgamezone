@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Space Explorer - Alien Frontier! 🚀</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Space Explorer</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <!-- Space status bars -->
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">🛡️ HP:</span>
+                <div class="progress-outer">
+                    <div id="hpBar" class="progress-inner hp-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <span class="status-label">⚡ Fuel:</span>
+                <div class="progress-outer">
+                    <div id="fuelBar" class="progress-inner fuel-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="480" height="320"></canvas>
+            
+            <!-- Planet Tracker Radar -->
+            <div class="radar-box" id="radarBox">
+                Planets Visited: <span id="visitedCountVal">0 / 5</span>
+            </div>
+        </div>
+
+        <!-- Virtual Mobile D-pad / Steering -->
+        <div class="mobile-dpad">
+            <button class="dpad-btn" id="btnThrust" style="background-color: #22c55e;">🔥 Thrust</button>
+            <div class="horizontal-group">
+                <button class="dpad-btn" id="btnLeft">◀ Turn L</button>
+                <button class="dpad-btn" id="btnRight">Turn R ▶</button>
+            </div>
+            <button class="dpad-btn" id="btnShoot" style="background-color: #ef4444;">⚡ Shoot</button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Explorer Score: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Use Keyboard Arrows / WASD to steer, Spacebar to shoot! Visit all 5 planets!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Space Explorer! 🚀</h2>
+                <p>Blast off into deep space to explore 5 mysterious planets! Use your map/radar to locate them:</p>
+                <p><b>Mercury | Venus | Earth | Jupiter | Saturn</b></p>
+                <p>Dodge asteroids (-20 HP), shoot down chasing alien ships (Spacebar), and collect yellow fuel canisters to keep your oxygen filled!</p>
+                <button id="startBtn" class="play-again-btn">LAUNCH SHIP</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="endTitle">Mission Failed! 🛸</h2>
+                <p id="failMessage">Your ship ran out of fuel or was destroyed!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Explore Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌴 Dino Stunt Rider — KidsGameZone</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <a href="../../index.html" class="back-link">🏠 Exit</a>
+                <button id="btnFullscreen" class="fullscreen-btn">📺 Fullscreen</button>
+            </div>
+            <div class="game-title">🦖 Dino Stunt Rider</div>
+            <div class="lives-badge">❤️ Lives: <span id="livesVal">3</span></div>
+        </div>
+
+        <div class="stats-row">
+            <div class="level-tabs">
+                <button class="level-btn active" data-lvl="0">Easy Hills</button>
+                <button class="level-btn" data-lvl="1">Big Jumps</button>
+                <button class="level-btn" data-lvl="2">Mega Ramps</button>
+            </div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <!-- Canvas Game viewport -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="300"></canvas>
+            <div class="stunt-message" id="stuntMsg">BACKFLIP! +50</div>
+        </div>
+
+        <!-- Mobile Touch Keys (Hidden on desktop) -->
+        <div class="mobile-controls">
+            <div class="drive-buttons">
+                <button class="ctrl-btn" id="btnGas">🏎️ Gas</button>
+                <button class="ctrl-btn" id="btnBrake">🛑 Brake</button>
+            </div>
+            <div class="tilt-buttons">
+                <button class="ctrl-btn" id="btnTiltBack">↩️ Lean Back</button>
+                <button class="ctrl-btn" id="btnTiltForward">↪️ Lean Fwd</button>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">RIGHT/LEFT Arrow = Gas/Brake | UP/DOWN Arrow = Lean Back/Forward</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Dino Stunt Rider! 🦕</h2>
+                <p>Ride across prehistoric jungle slopes, collect golden dino eggs, and pull crazy stunts!</p>
+                <p>Perform backflips/frontflips in the air (+50 pts) but land safely on your wheels. Crashing (head hits ground) loses a life!</p>
+                <button id="startBtn" class="play-again-btn">START RIDE</button>
+            </div>
+        </div>
+
+        <!-- Game Over / Lives Out Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>💥 Crashed & Extinct!</h2>
+                <p>You ran out of lives!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Ride Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

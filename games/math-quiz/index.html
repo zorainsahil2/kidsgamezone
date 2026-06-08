@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Quiz - Quick Arithmetic Quiz</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container" id="gameFrame">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Math Quiz</div>
+            <div class="stats-box">
+                <span class="timer-badge">⏳ <span id="timerVal">30</span>s</span>
+            </div>
+        </div>
+
+        <div class="score-row">
+            <div class="score-item">Score: <span id="scoreVal">0</span></div>
+            <div class="score-item">Best: <span id="highScoreVal">0</span></div>
+        </div>
+
+        <!-- Question Box -->
+        <div class="question-container">
+            <div class="question-title" id="questionTitle">Ready?</div>
+            <div class="encouragement-text" id="encouragementText">Click START to begin!</div>
+        </div>
+
+        <!-- Choices Grid -->
+        <div class="choices-grid">
+            <button class="choice-btn option-purple" data-idx="0" id="opt-0">-</button>
+            <button class="choice-btn option-teal" data-idx="1" id="opt-1">-</button>
+            <button class="choice-btn option-orange" data-idx="2" id="opt-2">-</button>
+            <button class="choice-btn option-pink" data-idx="3" id="opt-3">-</button>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Tap the correct answer button as fast as you can before the time runs out!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Math Quiz Blitz! ⚡</h2>
+                <p>Answer as many arithmetic questions as you can in 30 seconds!</p>
+                <p>Addition, Subtraction, and Multiplication. Correct answers score +10 points!</p>
+                <button id="startBtn" class="restart-btn">START QUIZ</button>
+            </div>
+        </div>
+
+        <!-- Time's Up Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>⏰ Time's Up!</h2>
+                <p>Great job exercising your brain!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Quiz Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Car Racing 2D (Racing)</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Car Racing 2D</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | High: <span id="highScoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="300" height="500"></canvas>
+            <!-- Lives Display overlay inside the wrapper -->
+            <div class="lives-overlay">Lives: <span id="livesVal">3</span></div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Left/Right arrows/A-D or Swipes/Taps to change lanes!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

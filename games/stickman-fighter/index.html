@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stickman Fighter - 2D Action Combat</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Stickman Fighter</div>
+            <div class="timer-badge">⏳ <span id="timerVal">60</span>s</div>
+        </div>
+
+        <!-- Fight Bars Panel -->
+        <div class="fighter-stats-panel">
+            <div class="fighter-column player-col">
+                <div class="fighter-name">👊 PLAYER (P1)</div>
+                <div class="hp-bar-outer">
+                    <div id="playerHp" class="hp-bar-inner player-hp-bg" style="width: 100%;"></div>
+                </div>
+                <div class="round-wins" id="playerWins">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="round-indicator" id="roundText">ROUND 1</div>
+
+            <div class="fighter-column ai-col">
+                <div class="fighter-name">🤖 AI BOT (P2)</div>
+                <div class="hp-bar-outer">
+                    <div id="aiHp" class="hp-bar-inner ai-hp-bg" style="width: 100%;"></div>
+                </div>
+                <div class="round-wins" id="aiWins">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Game Arena -->
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="280"></canvas>
+            <div class="fight-alert" id="fightAlert">FIGHT!</div>
+        </div>
+
+        <!-- Mobile Touch Controls overlay (hidden on desktop) -->
+        <div class="mobile-dpad">
+            <div class="direction-keys">
+                <button class="dpad-btn" id="btnLeft">◀️</button>
+                <button class="dpad-btn" id="btnJump">🔼</button>
+                <button class="dpad-btn" id="btnRight">▶️</button>
+            </div>
+            <div class="action-keys">
+                <button class="action-btn purple-btn" id="btnPunch">👊 Punch</button>
+                <button class="action-btn pink-btn" id="btnKick">🦶 Kick</button>
+                <button class="action-btn blue-btn" id="btnBlock">🛡️ Block</button>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: Matches Won <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Arrows = Move/Jump | A = Punch | S = Kick | D = Block</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Stickman Fighter! 👊</h2>
+                <p>Simple 2D combat action! Best of 3 rounds wins the match!</p>
+                <p>Punch: deals 10 HP | Kick: deals 15 HP | Block: reduces damage by 50%</p>
+                <button id="startBtn" class="play-again-btn">START FIGHT</button>
+            </div>
+        </div>
+
+        <!-- Game Over / Match Complete Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="endTitle">Match Over!</h2>
+                <p id="endMessage">Who won?</p>
+                <p>Matches Won: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Fight Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

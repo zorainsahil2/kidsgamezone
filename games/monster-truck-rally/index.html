@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Monster Truck Rally - Off-Road Physics! 🚜</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Truck Rally</div>
+            <div class="score-display">✨ Time: <span id="timeVal">0.0s</span></div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">🏁 Distance:</span>
+                <span id="distVal" style="color: #4ade80; font-weight: bold;">0m / 1500m</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">🚜 Lives:</span>
+                <span id="livesVal" style="color: #ef4444; font-weight: bold;">❤️❤️❤️</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="480" height="320"></canvas>
+        </div>
+
+        <!-- Touch Controls layout overlay -->
+        <div class="controls-panel">
+            <div class="control-row">
+                <button class="ctrl-btn" id="btnLeft" style="background-color: #ef4444;">◀ Reverse</button>
+                <button class="ctrl-btn" id="btnTiltBack" style="background-color: #3b82f6;">⤴ Tilt L</button>
+                <button class="ctrl-btn" id="btnTiltFwd" style="background-color: #3b82f6;">⤵ Tilt R</button>
+                <button class="ctrl-btn" id="btnRight" style="background-color: #22c55e;">Forward ▶</button>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Rally Score: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Use Keyboard Arrows (Left/Right = Drive, Up/Down = Tilt) or buttons to drive! Crush cars and boost!</span>
+        </div>
+
+        <!-- Start Overlay / Track Selection -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Monster Truck Rally! 🚜</h2>
+                <p>Choose your off-road racing track:</p>
+                <div class="track-selection">
+                    <button class="play-again-btn track-btn" onclick="selectTrack('Muddy Hills', '#854d0e')">🟫 Muddy Hills</button>
+                    <button class="play-again-btn track-btn" onclick="selectTrack('Desert Dunes', '#ea580c')">🟧 Desert Dunes</button>
+                    <button class="play-again-btn track-btn" onclick="selectTrack('Snow Mountain', '#0284c7')">🟦 Snow Mountain</button>
+                </div>
+                <p style="margin-top: 15px;">Balance your truck in mid-air so you don't land upside down! Crush cars for +25 points!</p>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="endTitle">Race Finished! 🏁</h2>
+                <p id="failMessage">You crossed the finish line!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Rally Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

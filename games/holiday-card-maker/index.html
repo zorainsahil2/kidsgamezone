@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Holiday Card Maker - Creative Card Sandbox! 🎨</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Card Maker</div>
+            <div class="score-display">✨ Saved: <span id="scoreVal">0</span></div>
+        </div>
+
+        <!-- Toolbar: Themes -->
+        <div class="toolbar-section">
+            <span class="toolbar-label">Theme:</span>
+            <div class="button-group">
+                <button class="theme-btn active" onclick="setTheme('Christmas')">🎄 Christmas</button>
+                <button class="theme-btn" onclick="setTheme('Halloween')">🎃 Halloween</button>
+                <button class="theme-btn" onclick="setTheme('Easter')">🐣 Easter</button>
+                <button class="theme-btn" onclick="setTheme('NewYear')">🎆 New Year</button>
+            </div>
+        </div>
+
+        <!-- Viewport Workspace -->
+        <div class="canvas-wrapper">
+            <canvas id="cardCanvas" width="400" height="300"></canvas>
+            <div class="workspace-hint">Click & Drag placed items to move them!</div>
+        </div>
+
+        <!-- Controls Console -->
+        <div class="tools-console">
+            <!-- Text Tool -->
+            <div class="tool-row">
+                <input type="text" id="textInput" placeholder="Write card message..." value="Merry Christmas!">
+                <button class="action-btn" onclick="addTextItem()" style="background-color: #06b6d4;">✍️ Add Text</button>
+            </div>
+            
+            <!-- Font configs -->
+            <div class="tool-row font-configs">
+                <div class="config-item">
+                    <label>Size:</label>
+                    <input type="range" id="fontSizeSlider" min="14" max="36" value="20">
+                </div>
+                <div class="config-item">
+                    <label>Color:</label>
+                    <div class="color-swatches">
+                        <div class="swatch active" style="background-color: #ffffff;" onclick="selectFontColor(this, '#ffffff')"></div>
+                        <div class="swatch" style="background-color: #ef4444;" onclick="selectFontColor(this, '#ef4444')"></div>
+                        <div class="swatch" style="background-color: #eab308;" onclick="selectFontColor(this, '#eab308')"></div>
+                        <div class="swatch" style="background-color: #22c55e;" onclick="selectFontColor(this, '#22c55e')"></div>
+                        <div class="swatch" style="background-color: #3b82f6;" onclick="selectFontColor(this, '#3b82f6')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stickers Panel -->
+            <div class="stickers-panel">
+                <span class="toolbar-label">Stickers:</span>
+                <div id="stickersContainer" class="stickers-row">
+                    <!-- Loaded dynamically via js based on theme -->
+                </div>
+            </div>
+            
+            <!-- Drawing Stamp Tools -->
+            <div class="stamp-section">
+                <span class="toolbar-label">Stamps:</span>
+                <div class="button-group">
+                    <button class="stamp-btn" id="stampStar" onclick="selectStamp('star')">⭐ Star</button>
+                    <button class="stamp-btn" id="stampHeart" onclick="selectStamp('heart')">❤️ Heart</button>
+                    <button class="stamp-btn" id="stampSnow" onclick="selectStamp('snowflake')">❄️ Snow</button>
+                    <button class="stamp-btn" id="stampPumpkin" onclick="selectStamp('pumpkin')">🎃 Pumpkin</button>
+                    <button class="stamp-btn active" id="stampNone" onclick="selectStamp('none')">🚫 No Stamp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Actions -->
+        <div class="action-footer">
+            <button class="play-again-btn action-btn-full" id="saveCardBtn" style="background-color: #10b981; box-shadow: 0 4px 0 #047857;">💾 Save Card (PNG)</button>
+            <button class="play-again-btn action-btn-full" id="clearCardBtn" style="background-color: #f43f5e; box-shadow: 0 4px 0 #be123c;">🔄 New Card</button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Total Cards Created: <span id="highScoreVal">0</span></div>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Holiday Card Maker! 🎨</h2>
+                <p>Welcome to the greeting card studio! Design cards for Christmas, Halloween, Easter, and New Year.</p>
+                <p>Choose a theme, add cute sticker emojis, write personalized text messages, and use stamps to draw stars and hearts!</p>
+                <p>Click "Save Card" to download your creation as a high-quality PNG image!</p>
+                <button id="startBtn" class="play-again-btn">START DESIGNING</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

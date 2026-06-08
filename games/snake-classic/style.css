@@ -1,0 +1,103 @@
+/* Snake Style */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #4ECDC4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #4ECDC4;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.3rem;
+    color: #FFE66D;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-board {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    background: #111; /* Pitch black retro backing */
+    border: 4px solid #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    display: block;
+}
+
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.controls-hint {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background-color: #FF6B35;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #000;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #000;
+}

@@ -1,0 +1,286 @@
+/* Princess Dress Up Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fbcfe8 0%, #ebd5ff 100%);
+    color: #4a044e;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 880px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 4px dashed #f472b6;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(219, 39, 119, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #db2777;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: 2px solid #f472b6;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 3px 0 #f472b6;
+    transition: all 0.15s ease;
+}
+
+.back-link:hover {
+    background: #fdf2f8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 #f472b6;
+}
+
+.back-link:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #f472b6;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.8rem;
+    color: #db2777;
+    text-shadow: 2px 2px 0px #fdf2f8, 3px 3px 0px #f472b6;
+}
+
+.sound-toggle {
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.sound-toggle:hover {
+    transform: scale(1.15);
+}
+
+.game-content-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+/* Canvas side styles */
+.canvas-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    border: 6px solid #f472b6;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(219, 39, 119, 0.12);
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 380px;
+    justify-content: space-between;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.95rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #00000020;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.action-btn:hover {
+    filter: brightness(1.05);
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #00000020;
+}
+
+.purple-btn { background-color: #a855f7; border-color: #d8b4fe; }
+.green-btn { background-color: #22c55e; border-color: #86efac; }
+.red-btn { background-color: #f43f5e; border-color: #fecdd3; }
+
+/* Options side styles */
+.options-side {
+    flex: 1.1;
+    background: rgba(255, 255, 255, 0.6);
+    border: 3px solid #fbcfe8;
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.tabs-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 2px solid #fbcfe8;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    padding: 8px 12px;
+    border: 2px solid #fbcfe8;
+    background: white;
+    border-radius: 10px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.9rem;
+    color: #c084fc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    background: #faf5ff;
+    color: #a855f7;
+}
+
+.tab-btn.active {
+    background: #db2777;
+    color: white;
+    border-color: #db2777;
+    box-shadow: 0 3px 0 #be185d;
+}
+
+.items-container {
+    height: 330px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 10px;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar for Items */
+.items-container::-webkit-scrollbar {
+    width: 6px;
+}
+.items-container::-webkit-scrollbar-track {
+    background: rgba(244, 114, 182, 0.05);
+    border-radius: 10px;
+}
+.items-container::-webkit-scrollbar-thumb {
+    background: #f472b6;
+    border-radius: 10px;
+}
+
+.item-card {
+    background: white;
+    border: 3px solid #fbcfe8;
+    border-radius: 12px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.item-card:hover {
+    transform: translateY(-2px);
+    border-color: #f472b6;
+    box-shadow: 0 4px 8px rgba(219, 39, 119, 0.08);
+}
+
+.item-card.active {
+    border-color: #db2777;
+    background: #fff1f2;
+    transform: scale(1.02);
+}
+
+.item-preview {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    width: 100%;
+}
+
+.item-name {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-align: center;
+    color: #701a75;
+}
+
+.game-footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.controls-hint {
+    font-size: 0.85rem;
+    color: #701a75;
+    font-weight: 700;
+    background: #fdf2f8;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 2px dashed #f472b6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .game-content-layout {
+        flex-direction: column;
+    }
+    .options-side {
+        height: auto;
+    }
+    .items-container {
+        height: 220px;
+    }
+}

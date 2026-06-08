@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jigsaw Puzzle - Animal fun</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Animal Jigsaw</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">1000</span>
+            </div>
+        </div>
+
+        <!-- Animal Tabs -->
+        <div class="animal-tabs">
+            <button class="animal-btn active" data-animal="lion">🦁 Lion</button>
+            <button class="animal-btn" data-animal="elephant">🐘 Elephant</button>
+            <button class="animal-btn" data-animal="giraffe">🦒 Giraffe</button>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="500" height="400"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Puzzle Score: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Drag pieces from the sides and fit them in the grid. Double-tap/click to solve!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Scramble Puzzle</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Animal Jigsaw! 🧩</h2>
+                <p>Pick an animal and assemble the 4x4 jigsaw puzzle!</p>
+                <p>Drag the pieces to their matching slots on the board. Score decreases over time, so solve it fast!</p>
+                <button id="startBtn" class="restart-btn">START PUZZLE</button>
+            </div>
+        </div>
+
+        <!-- Complete Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Puzzle Completed! 🎉</h2>
+                <p>Awesome! You solved the puzzle!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

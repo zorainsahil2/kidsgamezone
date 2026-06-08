@@ -1,0 +1,330 @@
+/* Draw and Guess Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); /* warm yellow easel */
+    color: #451a03;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #f59e0b;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #d97706;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #fde68a;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #fffbeb;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #d97706;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.timer-badge {
+    background: #fef3c7;
+    border: 2px solid #fde68a;
+    color: #d97706;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #78350f;
+}
+
+.prompt-box {
+    background: #fffbeb;
+    border: 2px solid #fde68a;
+    border-radius: 10px;
+    padding: 4px 12px;
+    font-size: 0.95rem;
+}
+
+.prompt-box strong {
+    font-family: 'Fredoka', cursive;
+    color: #b45309;
+    font-size: 1.1rem;
+}
+
+/* Toolbar tools */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tool-group {
+    display: flex;
+    gap: 4px;
+}
+
+.tool-btn, .size-btn {
+    padding: 6px 10px;
+    border: 2px solid #cbd5e1;
+    background: white;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tool-btn.active, .size-btn.active {
+    background-color: #d97706;
+    color: white;
+    border-color: #d97706;
+}
+
+.action-btn {
+    padding: 6px 10px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.red-btn { background-color: #ef4444; }
+.green-btn { background-color: #22c55e; }
+
+/* Palette swatches */
+.palette-container {
+    background: #fffbeb;
+    border: 2px solid #fde68a;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.palette-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+}
+
+.color-swatch {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.15s ease;
+    box-sizing: border-box;
+}
+
+.color-swatch:hover {
+    transform: scale(1.15);
+}
+
+.color-swatch.selected {
+    transform: scale(1.22);
+    border-color: #d97706;
+    box-shadow: 0 0 8px rgba(217, 119, 6, 0.6);
+}
+
+/* Canvas drawing */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    border: 4px solid #f59e0b;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: crosshair;
+}
+
+/* Gallery strip container */
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #fffbeb;
+    padding: 8px;
+    border-radius: 12px;
+    border: 2px solid #fde68a;
+}
+
+.gallery-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #78350f;
+    text-transform: uppercase;
+}
+
+.gallery-strip {
+    display: flex;
+    gap: 8px;
+    min-height: 48px;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.empty-gallery {
+    font-size: 0.75rem;
+    color: #b45309;
+    font-style: italic;
+}
+
+.gallery-thumb {
+    height: 44px;
+    aspect-ratio: 4/3;
+    border: 2px solid #d97706;
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* Overlays modals styling */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(120, 53, 15, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #fffbeb;
+    border: 4px solid #f59e0b;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #b45309;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #78350f;
+    margin: 8px 0;
+}
+
+.rating-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.rate-btn {
+    flex: 1;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1rem;
+    color: white;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.rate-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+}
+
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background-color: #d97706;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 0px #b45309;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.restart-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #b45309;
+}

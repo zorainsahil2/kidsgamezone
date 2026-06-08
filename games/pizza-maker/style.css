@@ -1,0 +1,250 @@
+/* Pizza Maker Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #4ECDC4;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #4ECDC4;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #FF6B35;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.score-board {
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+/* Meta info row */
+.meta-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+}
+
+.order-sheet {
+    background-color: #2D3748;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #4a5568;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.sheet-title {
+    font-family: 'Fredoka', cursive;
+    color: #FFE66D;
+    margin-bottom: 2px;
+}
+
+.required-toppings {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.timer-box {
+    background-color: #2D3748;
+    border: 2px solid #e53e3e;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ff6b6b;
+}
+
+/* Workspace layout */
+.workspace {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    background-color: #2D3748;
+    padding: 10px;
+    border-radius: 12px;
+    border: 3px solid #718096;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Shelf shelf items */
+.toppings-shelf {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.shelf-item {
+    background-color: #4a5568;
+    border: 2px solid #718096;
+    border-radius: 8px;
+    padding: 8px 4px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.shelf-item:active {
+    transform: scale(0.95);
+}
+
+.shelf-item.active {
+    border-color: #FFE66D;
+    background-color: #2d3748;
+    box-shadow: 0 0 6px #FFE66D;
+    transform: scale(1.02);
+}
+
+.pizza-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: #cbd5e0; /* wood table */
+    border-radius: 10px;
+    display: block;
+    cursor: crosshair;
+}
+
+/* Footer layout */
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-action-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px;
+    width: 100%;
+}
+
+.action-btn {
+    padding: 10px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.15s;
+}
+
+.action-btn.clear { background-color: #e53e3e; }
+.action-btn.serve { background-color: #38a169; }
+.action-btn:active { transform: scale(0.95); }
+
+.high-score-line {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #FFE66D;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 32, 44, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #2D3748;
+    border: 4px solid #4a5568;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #FFE66D;
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.overlay-content p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 8px 0;
+}

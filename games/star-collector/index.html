@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Star Collector - Catch and Score! 🌟</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Star Collector</div>
+            <div class="score-display">✨ Score: <span id="scoreVal">0</span></div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="status-label">❤️ Lives:</span>
+                <span id="livesVal" style="color: #ef4444; font-weight: bold; font-size: 1.1rem;">❤️❤️❤️❤️❤️</span>
+            </div>
+            <div class="status-item" id="magnetTimerContainer" style="opacity: 0;">
+                <span class="status-label" style="color: #38bdf8;">🧲 Magnet:</span>
+                <span id="magnetTimerVal" style="color: #38bdf8; font-weight: bold;">5.0s</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="480"></canvas>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Catch: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Move ship using Keyboard Arrows or Drag screen to collect stars! Avoid letting them hit the bottom!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Star Collector! 🌟</h2>
+                <p>Catch beautiful falling stars with your basket spaceship!</p>
+                <p>Catch Gold (✨, +50) and Rainbow (🌈, +100) stars. Collect the <b>Blue Magnet (🧲)</b> to double your catch width!</p>
+                <p>Letting a star slip past and hit the bottom loses a life (5 total)!</p>
+                <button id="startBtn" class="play-again-btn">START COLLECTING</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Game Over! 🛸</h2>
+                <p id="failMessage">Too many stars escaped into deep space!</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Collect Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

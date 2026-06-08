@@ -1,0 +1,294 @@
+/* Number Puzzle Stylesheet */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+    color: #431407;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    margin: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #ea580c;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(234, 88, 12, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    text-decoration: none;
+    font-family: 'Fredoka', cursive;
+    color: #ea580c;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid #fdba74;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: #fff7ed;
+}
+
+.game-title {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.4rem;
+    color: #ea580c;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+.score-container {
+    display: flex;
+    gap: 6px;
+}
+
+.score-box {
+    background: #ffedd5;
+    border: 2px solid #fdba74;
+    border-radius: 8px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #c2410c;
+    display: flex;
+    flex-direction: column;
+}
+
+.score-box span {
+    font-family: 'Fredoka', cursive;
+    font-size: 1.1rem;
+    color: #431407;
+}
+
+.game-sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-intro {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #9a3412;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border: 2px solid #fdba74;
+    background: white;
+    border-radius: 8px;
+    font-family: 'Fredoka', cursive;
+    font-size: 0.85rem;
+    color: #ea580c;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #fdba74;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #fdba74;
+}
+
+/* 4x4 Grid Board Layout */
+.board-wrapper {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 10px auto;
+    background: #c2410c;
+    border-radius: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: none;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-cell {
+    background: rgba(255, 237, 213, 0.25);
+    border-radius: 6px;
+}
+
+/* Absolute overlay for animated numbers */
+.tile-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    pointer-events: none;
+}
+
+.tile {
+    position: absolute;
+    width: 67.5px;
+    height: 67.5px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Fredoka', cursive;
+    font-size: 1.6rem;
+    font-weight: 800;
+    transition: left 0.1s ease, top 0.1s ease;
+    animation: appear 0.15s ease-out;
+}
+
+/* Tile color variants */
+.tile-2 { background: #ffedd5; color: #431407; }
+.tile-4 { background: #fed7aa; color: #431407; }
+.tile-8 { background: #fdba74; color: #ffffff; text-shadow: 1px 1px 0px #c2410c; }
+.tile-16 { background: #f97316; color: #ffffff; text-shadow: 1px 1px 0px #431407; }
+.tile-32 { background: #ea580c; color: #ffffff; text-shadow: 1px 1px 0px #431407; }
+.tile-64 { background: #c2410c; color: #ffffff; text-shadow: 1px 1px 0px #000; }
+.tile-128 { background: #fef08a; color: #431407; font-size: 1.4rem; }
+.tile-256 { background: #fde047; color: #431407; font-size: 1.4rem; box-shadow: 0 0 8px #fde047; }
+.tile-512 { background: #eab308; color: #ffffff; font-size: 1.4rem; box-shadow: 0 0 10px #eab308; }
+.tile-1024 { background: #c084fc; color: #ffffff; font-size: 1.25rem; box-shadow: 0 0 12px #c084fc; }
+.tile-2048 { background: #84cc16; color: #ffffff; font-size: 1.25rem; box-shadow: 0 0 16px #84cc16; }
+.tile-super { background: #06b6d4; color: #ffffff; font-size: 1.15rem; box-shadow: 0 0 20px #06b6d4; }
+
+/* Dynamic position shifts (calculated dynamically in JS via absolute positioning) */
+
+/* Merge & pop animations */
+@keyframes appear {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.tile-merged {
+    animation: merge 0.15s ease-out;
+}
+
+@keyframes merge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+.game-footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.controls-hint {
+    font-size: 0.75rem;
+    color: #9a3412;
+    font-weight: 700;
+    background: #ffedd5;
+    padding: 6px 12px;
+    border-radius: 10px;
+    border: 1.5px dashed #fdba74;
+}
+
+/* Modals overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(67, 20, 7, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-content {
+    background-color: #fff7ed;
+    border: 4px solid #ea580c;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.overlay-content h2 {
+    font-family: 'Fredoka', cursive;
+    color: #ea580c;
+    margin-top: 0;
+    font-size: 1.6rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #431407;
+    margin: 8px 0;
+}
+
+.overlay-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.overlay-btn {
+    flex: 1;
+    padding: 12px;
+    font-family: 'Fredoka', cursive;
+    font-size: 1rem;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.overlay-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+.orange-btn { background-color: #ea580c; border-color: #fdba74; }
+.green-btn { background-color: #22c55e; border-color: #86efac; }

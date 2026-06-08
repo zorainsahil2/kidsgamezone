@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Angry Monkey</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Angry Monkey</div>
+            <div class="score-board">
+                Level: <span id="levelVal">1</span>/50 | Score: <span id="scoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            <div class="ammo-indicator">Monkeys Left: <span id="ammoVal">3</span></div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Drag the monkey inside the slingshot, aim, and release to fire! Destroy all enemies!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Angry Monkey</h2>
+                <p>Pull back the slingshot and launch the Flying Monkey to demolish the structures and destroy all enemies!</p>
+                <p>Complete all 50 levels to score maximum points.</p>
+                <button id="startBtn" class="restart-btn">START BATTLE</button>
+            </div>
+        </div>
+
+        <!-- Level Win Overlay -->
+        <div class="overlay" id="levelWinOverlay">
+            <div class="overlay-content">
+                <h2>Level Cleared!</h2>
+                <p>You destroyed all enemies!</p>
+                <p>Remaining Monkeys Bonus: +<span id="bonusVal">0</span> pts</p>
+                <button id="nextLevelBtn" class="restart-btn">Next Level ➔</button>
+            </div>
+        </div>
+
+        <!-- Game Win Overlay -->
+        <div class="overlay" id="gameWinOverlay">
+            <div class="overlay-content">
+                <h2>Victory!</h2>
+                <p>All levels cleared! You are a slingshot master!</p>
+                <p>Final Score: <span id="finalScoreVal">0</span></p>
+                <p>High Score: <span id="winHighScoreVal">0</span></p>
+                <button id="winPlayAgainBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2>Out of Monkeys!</h2>
+                <p>Failed to destroy all enemies in this level.</p>
+                <p>Final Score: <span id="failScoreVal">0</span></p>
+                <button id="failRestartBtn" class="restart-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minecraft 2D - Creative Builder</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">MineCraft 2D</div>
+            <div class="score-board">
+                Placed: <span id="scoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="450"></canvas>
+        </div>
+
+        <!-- Block Inventory Hotbar -->
+        <div class="hotbar-container">
+            <div class="hotbar-slot active" data-block="1">
+                <span class="block-preview grass"></span>
+                <span class="slot-number">1</span>
+            </div>
+            <div class="hotbar-slot" data-block="2">
+                <span class="block-preview dirt"></span>
+                <span class="slot-number">2</span>
+            </div>
+            <div class="hotbar-slot" data-block="3">
+                <span class="block-preview stone"></span>
+                <span class="slot-number">3</span>
+            </div>
+            <div class="hotbar-slot" data-block="4">
+                <span class="block-preview wood"></span>
+                <span class="slot-number">4</span>
+            </div>
+            <div class="hotbar-slot" data-block="5">
+                <span class="block-preview leaves"></span>
+                <span class="slot-number">5</span>
+            </div>
+            <div class="hotbar-slot" data-block="6">
+                <span class="block-preview sand"></span>
+                <span class="slot-number">6</span>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Max Placed Record: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Move: A/D or Left/Right. Jump: W, Up, or Space. Left Click: break. Right Click: place. Select blocks with hotbar clicks or keys 1-6.</span>
+            <button id="clearBtn" class="restart-btn">🧹 Clear World</button>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

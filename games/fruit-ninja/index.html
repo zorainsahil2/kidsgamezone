@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fruit Ninja - Action Slice</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Fruit Slicer</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span> | High: <span id="highScoreVal">0</span>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="600" height="400"></canvas>
+            <div class="lives-container">
+                <span class="x-mark" id="x1">❌</span>
+                <span class="x-mark" id="x2">❌</span>
+                <span class="x-mark" id="x3">❌</span>
+            </div>
+        </div>
+
+        <div class="game-footer">
+            <span class="controls-hint">Drag mouse or swipe screen to slice the flying fruits! Avoid bombs!</span>
+            <button id="restartBtn" class="restart-btn">🔄 Restart</button>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

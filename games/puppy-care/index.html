@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Puppy Care - Virtual Pet Simulator</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="game-header">
+            <a href="../../index.html" class="back-link">🏠 Exit</a>
+            <div class="game-title">Puppy Care</div>
+            <div class="score-board">
+                Score: <span id="scoreVal">0</span>
+            </div>
+        </div>
+
+        <!-- Needs Panel -->
+        <div class="needs-panel">
+            <div class="need-item">
+                <span class="need-label">🍖 Hunger</span>
+                <div class="progress-bar-outer">
+                    <div id="hungerBar" class="progress-bar-inner hunger-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="need-item">
+                <span class="need-label">🎾 Play</span>
+                <div class="progress-bar-outer">
+                    <div id="happyBar" class="progress-bar-inner happy-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="need-item">
+                <span class="need-label">🧼 Clean</span>
+                <div class="progress-bar-outer">
+                    <div id="cleanBar" class="progress-bar-inner clean-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="need-item">
+                <span class="need-label">😴 Energy</span>
+                <div class="progress-bar-outer">
+                    <div id="energyBar" class="progress-bar-inner energy-bg" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <div class="timer-badge">⏳ <span id="timerVal">120</span>s</div>
+            <canvas id="gameCanvas" width="400" height="320"></canvas>
+        </div>
+
+        <!-- Action Panel -->
+        <div class="actions-panel">
+            <button id="feedBtn" class="care-btn feed-btn">🍖 Feed</button>
+            <button id="playBtn" class="care-btn play-btn">🎾 Play</button>
+            <button id="bathBtn" class="care-btn bath-btn">🧼 Bath</button>
+            <button id="sleepBtn" class="care-btn sleep-btn">😴 Sleep</button>
+        </div>
+
+        <div class="game-footer">
+            <div class="high-score-line">Best Care Score: <span id="highScoreVal">0</span></div>
+            <span class="controls-hint">Keep all needs bars above 0 to earn points! Keep puppy happy for 2 minutes!</span>
+        </div>
+
+        <!-- Start Overlay -->
+        <div class="overlay active" id="startOverlay">
+            <div class="overlay-content">
+                <h2>Puppy Care! 🐶</h2>
+                <p>Welcome your new baby puppy!</p>
+                <p>Feed, play, bathe, and tuck him to sleep. If any bar drains to 0, you'll lose points!</p>
+                <button id="startBtn" class="play-again-btn">START CARE</button>
+            </div>
+        </div>
+
+        <!-- Game Over / Complete Overlay -->
+        <div class="overlay" id="gameOverOverlay">
+            <div class="overlay-content">
+                <h2 id="endTitle">Care Session Complete! 🎉</h2>
+                <p id="endMessage">Puppy is super happy!</p>
+                <p>Your Score: <span id="failScoreVal">0</span></p>
+                <p>High Score: <span id="overlayHighScoreVal">0</span></p>
+                <button id="failRestartBtn" class="play-again-btn">Care Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="game.js"></script>
+</body>
+</html>

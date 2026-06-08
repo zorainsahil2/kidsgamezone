@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Dynamic Settings Loader -->
+    <script>
+        (function() {
+            fetch('api/get-public-settings.php')
+                .then(res => res.json())
+                .then(settings => {
+                    if (settings.maintenance_mode === '1') {
+                        window.location.href = 'maintenance.html';
+                        return;
+                    }
+                    
+                    if (settings.site_name) {
+                        document.title = document.title.replace('KidsGameZone', settings.site_name);
+                        document.querySelectorAll('.portal-header__logo').forEach(el => {
+                            el.innerText = '🎮 ' + settings.site_name;
+                        });
+                        const copyrightEl = document.querySelector('.portal-footer__copyright');
+                        if (copyrightEl) {
+                            copyrightEl.innerText = copyrightEl.innerText.replace('KidsGameZone', settings.site_name);
+                        }
+                    }
+                    
+                    if (settings.site_tagline) {
+                        const taglineEl = document.querySelector('.portal-header__tagline');
+                        if (taglineEl) {
+                            taglineEl.innerText = settings.site_tagline;
+                        }
+                    }
+                })
+                .catch(err => console.error('Error loading configuration:', err));
+        })();
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/ui/favicon.png">
+    <link rel="apple-touch-icon" href="assets/images/ui/apple-touch-icon.png">
+
+    <title>Privacy Policy — KidsGameZone</title>
+
+    <!-- Bubbly & Friendly Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <style>
+        .privacy-layout {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+            width: 100%;
+            flex-grow: 1;
+        }
+        
+        .privacy-card {
+            background-color: var(--card-bg);
+            border: var(--border-style);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .privacy-card {
+                padding: 25px 15px;
+            }
+        }
+        
+        .privacy-title {
+            font-family: 'Fredoka', cursive;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 0px var(--text);
+            -webkit-text-stroke: 1px var(--text);
+        }
+        
+        .privacy-subtitle {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .privacy-section-title {
+            font-family: 'Fredoka', cursive;
+            color: var(--secondary);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-shadow: 1.5px 1.5px 0px var(--text);
+            -webkit-text-stroke: 0.5px var(--text);
+        }
+        
+        .privacy-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+        
+        .privacy-list {
+            margin-left: 30px;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+        
+        .privacy-list li {
+            margin-bottom: 10px;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background-color: var(--secondary);
+            color: #FFFFFF;
+            border: 3px solid var(--text);
+            border-radius: 24px;
+            text-decoration: none;
+            font-family: 'Fredoka', cursive;
+            font-size: 1rem;
+            box-shadow: 0 4px 0px var(--text);
+            transition: var(--transition);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0px var(--text);
+            background-color: #5eead4;
+        }
+        
+        .btn-back:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px var(--text);
+        }
+        
+        .coppa-badge {
+            background-color: var(--accent);
+            border: 2px solid var(--text);
+            border-radius: 12px;
+            padding: 15px;
+            font-weight: 700;
+            color: var(--text);
+            box-shadow: 4px 4px 0px var(--text);
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .coppa-badge__icon {
+            font-size: 2.5rem;
+        }
+        
+        .coppa-badge__text {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Portal Header -->
+    <header class="portal-header">
+        <div class="portal-header__brand">
+            <a href="index.html" class="portal-header__logo">🎮 KidsGameZone</a>
+            <div class="portal-header__tagline">Play 50 Free Kids Games Online!</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="privacy-layout">
+        
+        <!-- Back to Home Button -->
+        <a href="index.html" class="btn-back">🏠 Return Home</a>
+        
+        <!-- Privacy Card -->
+        <main class="privacy-card">
+            <h1 class="privacy-title">Privacy Policy</h1>
+            <div class="privacy-subtitle">Last Updated: June 2026</div>
+
+            <div class="coppa-badge">
+                <span class="coppa-badge__icon">🛡️</span>
+                <span class="coppa-badge__text">
+                    <strong>COPPA COMPLIANT</strong><br>
+                    This portal does not collect, request, or share any personal information from children.
+                </span>
+            </div>
+
+            <p class="privacy-text">
+                Welcome to <strong>KidsGameZone</strong>! We are dedicated to providing a safe, secure, and fun environment for children to play educational and arcade browser games. This Privacy Policy details our practices regarding the collection, use, and security of information on our portal.
+            </p>
+
+            <h2 class="privacy-section-title">1. Children's Privacy (COPPA Compliance)</h2>
+            <p class="privacy-text">
+                Protecting bacchon ki privacy is our absolute priority. We comply fully with the **Children's Online Privacy Protection Act (COPPA)**.
+            </p>
+            <ul class="privacy-list">
+                <li><strong>No Personal Information:</strong> We do **NOT** request, collect, store, or share any personally identifiable information (PII) from children under the age of 13.</li>
+                <li><strong>No Accounts Required:</strong> Children do not need to register, create accounts, or enter usernames, emails, or phone numbers to play any games on this portal.</li>
+            </ul>
+
+            <h2 class="privacy-section-title">2. Information We Log & How We Protect It</h2>
+            <p class="privacy-text">
+                To keep the website stable, monitor game popularity, and track server issues, we automatically log anonymous analytical metrics.
+            </p>
+            <ul class="privacy-list">
+                <li><strong>Hashed IP Addresses:</strong> We do **NOT** save raw IP addresses. When a user loads a game, their IP address is instantly hashed using the SHA-256 algorithm (`ip_hash`) before database storage to ensure absolute anonymity.</li>
+                <li><strong>Anonymized Metrics:</strong> We track counts of game views, ad impressions, and ad skip events. No visitor profile is ever created.</li>
+            </ul>
+
+            <h2 class="privacy-section-title">3. Ad Networks and Cookies</h2>
+            <p class="privacy-text">
+                To fund the hosting of our 50 free games, we display family-friendly advertisements.
+            </p>
+            <ul class="privacy-list">
+                <li><strong>Contextual Advertising Only:</strong> Our selected ad networks (e.g. Google AdSense, Media.net, Adsterra) are restricted to showing kid-safe, contextual, and non-behavioral advertisements. We do not support retargeting or personalized ads tracking children's web habits.</li>
+                <li><strong>Cookies Usage:</strong> Cookies are used strictly for service performance, rate limiting (preventing tracking spam), and saving game scores locally in your browser.</li>
+            </ul>
+
+            <h2 class="privacy-section-title">4. Parental Rights & Controls</h2>
+            <p class="privacy-text">
+                Parents are in complete control of their children's web experience. Under COPPA, parents have the right to review what anonymous metrics are logged or request total erasure.
+            </p>
+            <p class="privacy-text">
+                If you have any questions, concerns, or inquiries, please contact our administration immediately via email at: <strong>support@kidsgamezone.com</strong>.
+            </p>
+
+            <h2 class="privacy-section-title">5. Policy Updates</h2>
+            <p class="privacy-text">
+                We may periodically update this policy to reflect modifications in regulations or website features. We advise parents to check this page occasionally to stay informed.
+            </p>
+        </main>
+    </div>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+        <div class="portal-footer__copyright">
+            © 2026 KidsGameZone — Free Games for Kids
+        </div>
+        <div class="portal-footer__links">
+            <a href="privacy.html" class="portal-footer__link">Privacy Policy</a>
+            <span style="color: var(--text-light);">|</span>
+            <a href="privacy.html" class="portal-footer__link">COPPA Compliance Notice</a>
+        </div>
+    </footer>
+
+</body>
+</html>
