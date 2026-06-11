@@ -6,7 +6,7 @@ try {
     $db = DB::get();
     
     // Fetch active games
-    $stmt = $db->query('SELECT slug FROM games WHERE is_active = 1 ORDER BY id ASC');
+    $stmt = $db->query('SELECT slug, id FROM games WHERE is_active = 1 ORDER BY id ASC');
     $games = $stmt->fetchAll();
     
     $today = date('Y-m-d');
@@ -34,7 +34,7 @@ try {
     // Game pages
     foreach ($games as $game) {
         $xml .= "    <url>\n";
-        $xml .= "        <loc>" . htmlspecialchars($domain . "/game.html?slug=" . $game['slug']) . "</loc>\n";
+        $xml .= "        <loc>" . htmlspecialchars($domain . "/game.html?slug=" . $game['slug'] . "&amp;id=" . $game['id']) . "</loc>\n";
         $xml .= "        <lastmod>" . $today . "</lastmod>\n";
         $xml .= "        <changefreq>weekly</changefreq>\n";
         $xml .= "        <priority>0.8</priority>\n";

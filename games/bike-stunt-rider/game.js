@@ -105,7 +105,15 @@ function loadAssets(callback) {
 }
 
 // Audio Configuration
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx = null;
+try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+        audioCtx = new AudioContextClass();
+    }
+} catch (e) {
+    console.warn('AudioContext failed to initialize (blocked by policy):', e);
+}
 let engineOsc = null;
 let engineGain = null;
 
@@ -834,5 +842,12 @@ if (btnFullscreen && container) {
 loadAssets(() => {
     initLevelEntities();
     highScoreVal.textContent = highScore;
+    
+    // Enable start button and restore text
+    if (startBtn) {
+        startBtn.disabled = false;
+        startBtn.textContent = 'START RIDE';
+    }
+    
     gameLoop();
 });

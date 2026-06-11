@@ -1,10 +1,9 @@
 <?php
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'kidsgamezone');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
-define('SITE_URL', getenv('SITE_URL') ?: 'http://localhost');
-define('SECRET_KEY', getenv('SECRET_KEY') ?: 'change-this-in-production');
+define('DB_HOST', 'sql203.infinityfree.com'); 
+define('DB_NAME', 'if0_42132629_kidsgamezone'); 
+define('DB_USER', 'if0_42132629'); 
+define('DB_PASS', 'IloveDubai22');
+define('SITE_URL', 'http://kidsgamezone.free.je');
+define('SECRET_KEY', 'kidsgamezone-secure-key-123');
 define('ADMIN_SESSION_NAME', 'kgz_admin_session');
-define('SESSION_LIFETIME', 3600); // 1 hour
-
+define('SESSION_LIFETIME', 3600);

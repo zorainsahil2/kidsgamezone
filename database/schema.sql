@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS kidsgamezone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE kidsgamezone;
 
 -- 1. Table: admin_users
 DROP TABLE IF EXISTS analytics;
