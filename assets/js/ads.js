@@ -104,36 +104,20 @@ const AdsManager = {
     
     element.appendChild(iframe);
     
-    try {
-      const iframeDoc = iframe.contentWindow.document || iframe.contentDocument;
-      iframeDoc.open();
-      iframeDoc.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            html, body {
-              margin: 0;
-              padding: 0;
-              width: 100%;
-              height: 100%;
-              overflow: hidden;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              background-color: transparent;
-            }
-          </style>
-        </head>
-        <body>
-          ${adCode}
-        </body>
-        </html>
-      `);
-      iframeDoc.close();
-    } catch (e) {
-      console.warn('AdsManager: Dynamic iframe write fallback used.', e);
-      element.innerHTML = adCode;
+    const html = '<!DOCTYPE html><html><head><style>html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; background-color: transparent; }</style></head><body>' + adCode + '</body></html>';
+    
+    if ('srcdoc' in iframe) {
+      iframe.srcdoc = html;
+    } else {
+      try {
+        const iframeDoc = iframe.contentWindow.document || iframe.contentDocument;
+        iframeDoc.open();
+        iframeDoc.write(html);
+        iframeDoc.close();
+      } catch (e) {
+        console.warn('AdsManager: Dynamic iframe write fallback failed.', e);
+        element.innerHTML = adCode;
+      }
     }
   },
 
