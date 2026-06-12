@@ -1,10 +1,5 @@
 <?php
 // Gateway Router for Vercel Serverless PHP Execution
-if (isset($_GET['version'])) {
-    header('Content-Type: text/plain');
-    echo "Version: 1.0.1 - Commit: 7ea0dce\n";
-    exit;
-}
 $path = $_GET['path'] ?? '';
 
 // Sanitize path to prevent directory traversal
