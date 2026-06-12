@@ -34,7 +34,7 @@ try {
     // Game pages
     foreach ($games as $game) {
         $xml .= "    <url>\n";
-        $xml .= "        <loc>" . htmlspecialchars($domain . "/game.html?slug=" . $game['slug'] . "&amp;id=" . $game['id']) . "</loc>\n";
+        $xml .= "        <loc>" . htmlspecialchars($domain . "/game.php?slug=" . $game['slug'] . "&amp;id=" . $game['id']) . "</loc>\n";
         $xml .= "        <lastmod>" . $today . "</lastmod>\n";
         $xml .= "        <changefreq>weekly</changefreq>\n";
         $xml .= "        <priority>0.8</priority>\n";

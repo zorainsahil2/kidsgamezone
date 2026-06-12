@@ -8,8 +8,20 @@ const AdsManager = {
    * Fetch active ad slots and initialize ad injections
    */
   async init() {
+    // 1. Read inline config if present
+    if (typeof window !== 'undefined' && window.preRollAdCode !== undefined && window.preRollAdCode !== null) {
+      this.slots['pre_roll'] = {
+        slot_name: 'pre_roll',
+        ad_code: window.preRollAdCode,
+        skip_after_seconds: window.preRollSkipSeconds || 5
+      };
+      // Banner ads are printed server-side directly in index.php and game.php,
+      // so we do not fetch or inject them dynamically on these pages.
+      return;
+    }
+
+    // 2. Fallback to API if not inlined
     try {
-      // Find API path relative to root
       const response = await fetch('/api/get-ads.php', {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       });

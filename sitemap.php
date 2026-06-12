@@ -34,7 +34,7 @@ try {
     
     // 2. Dynamic Game Player URLs
     foreach ($games as $game) {
-        $gameUrl = $baseUrl . "/game.html?slug=" . $game['slug'] . "&id=" . $game['id'];
+        $gameUrl = $baseUrl . "/game.php?slug=" . $game['slug'] . "&id=" . $game['id'];
         echo "    <url>\n";
         echo "        <loc>" . htmlspecialchars($gameUrl) . "</loc>\n";
         echo "        <changefreq>daily</changefreq>\n";

@@ -253,7 +253,7 @@ const HomepageManager = {
     
     // Set card redirection handler
     card.addEventListener('click', () => {
-      window.location.href = `game.html?slug=${game.slug}&id=${game.id}`;
+      window.location.href = `game.php?slug=${game.slug}&id=${game.id}`;
     });
 
     card.innerHTML = `

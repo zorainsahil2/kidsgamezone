@@ -73,6 +73,34 @@ function isLoggedIn() {
     
     // Validate session lifetime expiration
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > SESSION_LIFETIME)) {
+        // Clear active session variables to mark active session as expired
+        $_SESSION = [];
+        
+        // Attempt to restore session from secure cookie
+        if (isset($_COOKIE['kgz_admin_token']) && defined('SECRET_KEY')) {
+            $parts = explode('.', $_COOKIE['kgz_admin_token']);
+            if (count($parts) === 2) {
+                $payloadB64 = $parts[0];
+                $signature = $parts[1];
+                $payloadJson = base64_decode($payloadB64);
+                if ($payloadJson !== false) {
+                    $expectedSignature = hash_hmac('sha256', $payloadJson, SECRET_KEY);
+                    if (hash_equals($expectedSignature, $signature)) {
+                        $payload = json_decode($payloadJson, true);
+                        if (is_array($payload) && isset($payload['admin_id'], $payload['admin_username'], $payload['expires'])) {
+                            if ($payload['expires'] > time()) {
+                                // Restore session
+                                $_SESSION['admin_id'] = $payload['admin_id'];
+                                $_SESSION['admin_username'] = $payload['admin_username'];
+                                $_SESSION['last_activity'] = time();
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         logoutAdmin();
         return false;
     }

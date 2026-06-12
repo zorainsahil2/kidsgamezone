@@ -1,7 +1,7 @@
 const CACHE_NAME = 'kgz-cache-v1';
 const PRECACHE_ASSETS = [
   '/',
-  '/index.html',
+  '/index.php',
   '/assets/css/main.css',
   '/assets/js/main.js',
   '/assets/js/ads.js',
