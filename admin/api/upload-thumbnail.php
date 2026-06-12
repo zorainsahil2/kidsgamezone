@@ -33,8 +33,24 @@ if ($file['size'] > 2 * 1024 * 1024) {
 
 // Validate image mime type
 $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-$finfo = new finfo(FILEINFO_MIME_TYPE);
-$mimeType = $finfo->file($file['tmp_name']);
+$mimeType = '';
+
+if (class_exists('finfo')) {
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mimeType = $finfo->file($file['tmp_name']);
+} elseif (function_exists('mime_content_type')) {
+    $mimeType = mime_content_type($file['tmp_name']);
+} else {
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $mimes = [
+        'png' => 'image/png',
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'gif' => 'image/gif',
+        'webp' => 'image/webp'
+    ];
+    $mimeType = isset($mimes[$ext]) ? $mimes[$ext] : 'application/octet-stream';
+}
 
 if (!in_array($mimeType, $allowedMimes, true)) {
     jsonResponse([

@@ -51,8 +51,89 @@ const AdsManager = {
     const targetDiv = document.getElementById(slotName);
     
     if (targetDiv && slot) {
-      this.injectHtmlWithScripts(targetDiv, slot.ad_code);
+      const isScriptAd = slot.ad_code && (slot.ad_code.includes('<script') || slot.network === 'adsterra' || slot.network === 'adsense' || slot.network === 'medianet' || slot.network === 'propellerads');
+      
+      if (isScriptAd && slotName !== 'pre_roll') {
+        this.injectIframeAd(targetDiv, slot.ad_code, slotName);
+      } else {
+        this.injectHtmlWithScripts(targetDiv, slot.ad_code);
+      }
       this.trackEvent('ad_impression', null, slotName);
+    }
+  },
+
+  /**
+   * Return predefined ad unit sizing dimensions based on page slot
+   *
+   * @param {string} slotName 
+   * @returns {object}
+   */
+  getSlotDimensions(slotName) {
+    switch (slotName) {
+      case 'header_banner':
+      case 'footer_banner':
+        return { width: 728, height: 90 };
+      case 'sidebar_left':
+        return { width: 160, height: 600 };
+      case 'sidebar_right':
+        return { width: 300, height: 250 };
+      case 'pre_roll':
+        return { width: 300, height: 250 };
+      default:
+        return { width: 300, height: 250 };
+    }
+  },
+
+  /**
+   * Helper to write ad codes inside an isolated iframe, protecting parent window scope from document.write crashes
+   *
+   * @param {HTMLElement} element 
+   * @param {string} adCode 
+   * @param {string} slotName 
+   */
+  injectIframeAd(element, adCode, slotName) {
+    element.innerHTML = '';
+    const dim = this.getSlotDimensions(slotName);
+    
+    const iframe = document.createElement('iframe');
+    iframe.style.border = 'none';
+    iframe.style.overflow = 'hidden';
+    iframe.width = dim.width;
+    iframe.height = dim.height;
+    iframe.setAttribute('scrolling', 'no');
+    
+    element.appendChild(iframe);
+    
+    try {
+      const iframeDoc = iframe.contentWindow.document || iframe.contentDocument;
+      iframeDoc.open();
+      iframeDoc.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            html, body {
+              margin: 0;
+              padding: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: transparent;
+            }
+          </style>
+        </head>
+        <body>
+          ${adCode}
+        </body>
+        </html>
+      `);
+      iframeDoc.close();
+    } catch (e) {
+      console.warn('AdsManager: Dynamic iframe write fallback used.', e);
+      element.innerHTML = adCode;
     }
   },
 
@@ -127,7 +208,12 @@ const AdsManager = {
       overflow: 'hidden'
     });
     
-    this.injectHtmlWithScripts(adContainer, preRoll.ad_code);
+    const isScriptAd = preRoll.ad_code && (preRoll.ad_code.includes('<script') || preRoll.network === 'adsterra' || preRoll.network === 'adsense' || preRoll.network === 'medianet' || preRoll.network === 'propellerads');
+    if (isScriptAd) {
+      this.injectIframeAd(adContainer, preRoll.ad_code, 'pre_roll');
+    } else {
+      this.injectHtmlWithScripts(adContainer, preRoll.ad_code);
+    }
     overlay.appendChild(adContainer);
 
     // Track initial ad impression

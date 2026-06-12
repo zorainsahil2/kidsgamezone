@@ -31,8 +31,25 @@ if ($file['size'] > 1 * 1024 * 1024) {
 
 // Validate image mime type
 $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
-$finfo = new finfo(FILEINFO_MIME_TYPE);
-$mimeType = $finfo->file($file['tmp_name']);
+$mimeType = '';
+
+if (class_exists('finfo')) {
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mimeType = $finfo->file($file['tmp_name']);
+} elseif (function_exists('mime_content_type')) {
+    $mimeType = mime_content_type($file['tmp_name']);
+} else {
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $mimes = [
+        'png' => 'image/png',
+        'jpg' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'gif' => 'image/gif',
+        'webp' => 'image/webp',
+        'svg' => 'image/svg+xml'
+    ];
+    $mimeType = isset($mimes[$ext]) ? $mimes[$ext] : 'application/octet-stream';
+}
 
 if (!in_array($mimeType, $allowedMimes, true)) {
     jsonResponse([
@@ -44,45 +61,38 @@ if (!in_array($mimeType, $allowedMimes, true)) {
 try {
     $db = DB::get();
     
-    $targetDir = __DIR__ . '/../../assets/images/ui/';
-    
-    // Create directory if missing
-    if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0755, true);
-    }
-    
-    // Save as logo.png (overwrites existing)
-    $targetPath = $targetDir . 'logo.png';
-    $dbPath = 'assets/images/ui/logo.png';
-    
-    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-        // Update database site_settings row (compatible with MySQL and PostgreSQL/Supabase)
-        $driver = $db->getAttribute(PDO::ATTR_DRIVER_NAME);
-        if ($driver === 'pgsql') {
-            $stmt = $db->prepare("
-                INSERT INTO site_settings (setting_key, setting_value) 
-                VALUES ('logo_path', :value) 
-                ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value
-            ");
-        } else {
-            $stmt = $db->prepare("
-                INSERT INTO site_settings (setting_key, setting_value) 
-                VALUES ('logo_path', :value) 
-                ON DUPLICATE KEY UPDATE setting_value = :value
-            ");
-        }
-        $stmt->execute([':value' => $dbPath]);
-        
-        jsonResponse([
-            'success' => true,
-            'logo_path' => $dbPath
-        ]);
-    } else {
+    $logoData = @file_get_contents($file['tmp_name']);
+    if ($logoData === false) {
         jsonResponse([
             'success' => false,
-            'message' => 'Failed to save uploaded file'
+            'message' => 'Failed to read uploaded file contents.'
         ], 500);
     }
+    
+    $base64 = base64_encode($logoData);
+    $dbPath = 'data:' . $mimeType . ';base64,' . $base64;
+    
+    // Update database site_settings row (compatible with MySQL and PostgreSQL/Supabase)
+    $driver = $db->getAttribute(PDO::ATTR_DRIVER_NAME);
+    if ($driver === 'pgsql') {
+        $stmt = $db->prepare("
+            INSERT INTO site_settings (setting_key, setting_value) 
+            VALUES ('logo_path', :value) 
+            ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value
+        ");
+    } else {
+        $stmt = $db->prepare("
+            INSERT INTO site_settings (setting_key, setting_value) 
+            VALUES ('logo_path', :value) 
+            ON DUPLICATE KEY UPDATE setting_value = :value
+        ");
+    }
+    $stmt->execute([':value' => $dbPath]);
+    
+    jsonResponse([
+        'success' => true,
+        'logo_path' => $dbPath
+    ]);
     
 } catch (PDOException $e) {
     jsonResponse([

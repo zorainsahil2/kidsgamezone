@@ -42,6 +42,32 @@ function isLoggedIn() {
     startAdminSession();
     
     if (!isset($_SESSION['admin_id']) || !isset($_SESSION['admin_username'])) {
+        // Attempt to restore session from secure cookie
+        if (isset($_COOKIE['kgz_admin_token']) && defined('SECRET_KEY')) {
+            $parts = explode('.', $_COOKIE['kgz_admin_token']);
+            if (count($parts) === 2) {
+                $payloadB64 = $parts[0];
+                $signature = $parts[1];
+                $payloadJson = base64_decode($payloadB64);
+                if ($payloadJson !== false) {
+                    $expectedSignature = hash_hmac('sha256', $payloadJson, SECRET_KEY);
+                    if (hash_equals($expectedSignature, $signature)) {
+                        $payload = json_decode($payloadJson, true);
+                        if (is_array($payload) && isset($payload['admin_id'], $payload['admin_username'], $payload['expires'])) {
+                            if ($payload['expires'] > time()) {
+                                // Restore session
+                                $_SESSION['admin_id'] = $payload['admin_id'];
+                                $_SESSION['admin_username'] = $payload['admin_username'];
+                                $_SESSION['last_activity'] = time();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    if (!isset($_SESSION['admin_id']) || !isset($_SESSION['admin_username'])) {
         return false;
     }
     
@@ -92,6 +118,34 @@ function loginAdmin($username, $password) {
             $_SESSION['admin_username'] = $user['username'];
             $_SESSION['last_activity'] = time();
             
+            // Set secure persistent cookie (Remember Me - lasts 7 days)
+            if (defined('SECRET_KEY')) {
+                $secure = false;
+                if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+                    $secure = true;
+                } elseif (defined('SITE_URL') && stripos(SITE_URL, 'https://') === 0) {
+                    $secure = true;
+                }
+                
+                $expires = time() + 86400 * 7;
+                $payloadJson = json_encode([
+                    'admin_id' => $user['id'],
+                    'admin_username' => $user['username'],
+                    'expires' => $expires
+                ]);
+                $signature = hash_hmac('sha256', $payloadJson, SECRET_KEY);
+                $cookieValue = base64_encode($payloadJson) . '.' . $signature;
+                
+                setcookie('kgz_admin_token', $cookieValue, [
+                    'expires' => $expires,
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => $secure,
+                    'httponly' => true,
+                    'samesite' => 'Strict'
+                ]);
+            }
+            
             // Prevent Session Fixation attacks
             session_regenerate_id(true);
             return true;
@@ -111,6 +165,19 @@ function logoutAdmin() {
     
     // Unset all session variables
     $_SESSION = [];
+    
+    // Delete persistent cookie
+    if (isset($_COOKIE['kgz_admin_token'])) {
+        setcookie('kgz_admin_token', '', [
+            'expires' => time() - 3600,
+            'path' => '/',
+            'domain' => '',
+            'secure' => false,
+            'httponly' => true,
+            'samesite' => 'Strict'
+        ]);
+        unset($_COOKIE['kgz_admin_token']);
+    }
     
     // Delete session cookie if active
     if (ini_get('session.use_cookies')) {

@@ -679,6 +679,13 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                         <textarea id="gaScriptPreview" class="code-preview-area" readonly></textarea>
                     </div>
                 </div>
+                <div class="form-row" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="globalScriptsInput">Global Integration Scripts (e.g. Adsterra Popunder / Social Bar)</label>
+                        <textarea id="globalScriptsInput" style="height: 120px;" placeholder="Paste custom global scripts here (e.g., Popunder, Social Bar, global headers/footers)..."></textarea>
+                        <small class="form-help">Any scripts added here will be executed globally across the portal home and play pages. Wrap script code in &lt;script&gt; tags.</small>
+                    </div>
+                </div>
             </div>
 
             <!-- Section 4: Maintenance Mode -->
@@ -718,6 +725,40 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                         Generating the static sitemap will create/overwrite the <code>sitemap.xml</code> file in the portal's root directory.
                     </small>
                 </div>
+            </div>
+
+            <!-- Section: Admin Security Settings -->
+            <div class="settings-card">
+                <h3>Admin Profile Settings</h3>
+                <div class="form-row form-row-split">
+                    <div class="form-group">
+                        <label for="newUsernameInput">New Username</label>
+                        <input type="text" id="newUsernameInput" value="<?php echo $adminUsername; ?>" placeholder="Enter new username" required>
+                        <small class="form-help">Current username is: <span id="currentUsernameDisplay"><?php echo $adminUsername; ?></span></small>
+                    </div>
+                </div>
+                <div class="form-row form-row-split">
+                    <div class="form-group">
+                        <label for="newPasswordInput">New Password</label>
+                        <input type="password" id="newPasswordInput" placeholder="Enter new password (optional)">
+                        <small class="form-help">Leave blank if you do not want to change password.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPasswordInput">Confirm New Password</label>
+                        <input type="password" id="confirmPasswordInput" placeholder="Confirm new password">
+                        <small class="form-help">Must match new password.</small>
+                    </div>
+                </div>
+                <div class="form-row form-row-split">
+                    <div class="form-group">
+                        <label for="currentPasswordInput">Current Password (Required)</label>
+                        <input type="password" id="currentPasswordInput" placeholder="Enter current password to save changes" required>
+                        <small class="form-help">Enter your current password to authorize this profile update.</small>
+                    </div>
+                </div>
+                <button type="button" id="btnUpdateProfile" class="btn-save-all" style="font-size: 1rem; padding: 10px 25px; box-shadow: 0 4px 0px var(--text);">
+                    🔒 Update Profile Info
+                </button>
             </div>
 
             <!-- Section 5: Danger Zone -->
@@ -806,6 +847,9 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
             // Handle main form submission
             document.getElementById('siteSettingsForm').addEventListener('submit', handleSettingsSave);
 
+            // Handle Profile Update trigger
+            document.getElementById('btnUpdateProfile').addEventListener('click', handleProfileUpdate);
+
             // Handle sidebar logout
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 fetch('api/logout.php', {
@@ -864,6 +908,8 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                     document.getElementById('gaIdInput').value = settings.google_analytics_id || '';
                     updateGaPreview();
 
+                    document.getElementById('globalScriptsInput').value = settings.global_custom_scripts || '';
+
                     const isMaint = (settings.maintenance_mode === '1');
                     document.getElementById('maintenanceToggle').checked = isMaint;
                     
@@ -875,7 +921,11 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                     const fallback = document.getElementById('logoFallback');
                     
                     if (settings.logo_path && settings.logo_path.trim() !== '') {
-                        logoImg.src = '../' + settings.logo_path + '?t=' + new Date().getTime();
+                        let logoSrc = settings.logo_path;
+                        if (!logoSrc.startsWith('data:')) {
+                            logoSrc = '../' + logoSrc + '?t=' + new Date().getTime();
+                        }
+                        logoImg.src = logoSrc;
                         logoImg.style.display = 'block';
                         fallback.style.display = 'none';
                     } else {
@@ -994,6 +1044,7 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
             const maintenance_mode = document.getElementById('maintenanceToggle').checked ? '1' : '0';
             const seo_keywords = document.getElementById('seoKeywordsInput').value.trim();
             const robots_meta = document.getElementById('robotsPolicySelect').value;
+            const global_custom_scripts = document.getElementById('globalScriptsInput').value;
 
             showLoader(true, 'Saving Settings...');
 
@@ -1010,7 +1061,8 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                     google_analytics_id,
                     maintenance_mode,
                     seo_keywords,
-                    robots_meta
+                    robots_meta,
+                    global_custom_scripts
                 })
             })
             .then(res => {
@@ -1134,6 +1186,70 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                 showLoader(false);
                 console.error(err);
                 showToast('error', '❌ Network error during sitemap generation.');
+            });
+        }
+
+        // Profile update handler
+        function handleProfileUpdate() {
+            const new_username = document.getElementById('newUsernameInput').value.trim();
+            const new_password = document.getElementById('newPasswordInput').value;
+            const confirm_password = document.getElementById('confirmPasswordInput').value;
+            const current_password = document.getElementById('currentPasswordInput').value;
+
+            if (!new_username) {
+                alert('Please enter a username.');
+                return;
+            }
+            if (!current_password) {
+                alert('Please enter your current password to authorize changes.');
+                return;
+            }
+            if (new_password && new_password !== confirm_password) {
+                alert('New passwords do not match.');
+                return;
+            }
+
+            showLoader(true, 'Updating Profile Info...');
+
+            fetch('api/update-profile.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    new_username,
+                    new_password,
+                    confirm_password,
+                    current_password
+                })
+            })
+            .then(res => {
+                if (res.status === 401) {
+                    window.location.href = 'index.php';
+                    return;
+                }
+                return res.json();
+            })
+            .then(data => {
+                showLoader(false);
+                if (data && data.success) {
+                    showToast('success', '✅ Profile updated successfully!');
+                    document.getElementById('newPasswordInput').value = '';
+                    document.getElementById('confirmPasswordInput').value = '';
+                    document.getElementById('currentPasswordInput').value = '';
+                    document.getElementById('currentUsernameDisplay').innerText = new_username;
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showToast('error', '❌ Error updating: ' + (data ? data.message : 'Unknown error'));
+                }
+            })
+            .catch(err => {
+                showLoader(false);
+                console.error(err);
+                showToast('error', '❌ Network error updating profile info.');
             });
         }
     </script>

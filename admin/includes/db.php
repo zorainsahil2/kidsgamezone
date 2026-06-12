@@ -44,6 +44,28 @@ class DB {
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 ]);
             }
+
+            // Check for missing SEO columns in games table (auto-migration check)
+            try {
+                self::$instance->query('SELECT seo_title FROM games LIMIT 1');
+            } catch (PDOException $e) {
+                $driver = self::$instance->getAttribute(PDO::ATTR_DRIVER_NAME);
+                if ($driver === 'pgsql') {
+                    self::$instance->exec('ALTER TABLE games ADD COLUMN IF NOT EXISTS seo_title VARCHAR(255) DEFAULT NULL');
+                    self::$instance->exec('ALTER TABLE games ADD COLUMN IF NOT EXISTS seo_description TEXT DEFAULT NULL');
+                    self::$instance->exec('ALTER TABLE games ADD COLUMN IF NOT EXISTS seo_keywords VARCHAR(255) DEFAULT NULL');
+                    self::$instance->exec('ALTER TABLE games ADD COLUMN IF NOT EXISTS robots_meta VARCHAR(50) DEFAULT \'default\'');
+                } else {
+                    // Check if columns exist before adding in MySQL to prevent duplicate column errors
+                    $checkCols = self::$instance->query("SHOW COLUMNS FROM games LIKE 'seo_title'")->fetch();
+                    if (!$checkCols) {
+                        self::$instance->exec('ALTER TABLE games ADD COLUMN seo_title VARCHAR(255) DEFAULT NULL');
+                        self::$instance->exec('ALTER TABLE games ADD COLUMN seo_description TEXT DEFAULT NULL');
+                        self::$instance->exec('ALTER TABLE games ADD COLUMN seo_keywords VARCHAR(255) DEFAULT NULL');
+                        self::$instance->exec('ALTER TABLE games ADD COLUMN robots_meta VARCHAR(50) DEFAULT \'default\'');
+                    }
+                }
+            }
         }
         return self::$instance;
     }

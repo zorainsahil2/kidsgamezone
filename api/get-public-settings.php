@@ -11,7 +11,7 @@ try {
     $stmt = $db->query('SELECT setting_key, setting_value FROM site_settings');
     $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     
-    $allowedKeys = ['site_name', 'site_tagline', 'seo_description', 'logo_path', 'maintenance_mode', 'google_analytics_id', 'seo_keywords', 'robots_meta'];
+    $allowedKeys = ['site_name', 'site_tagline', 'seo_description', 'logo_path', 'maintenance_mode', 'google_analytics_id', 'seo_keywords', 'robots_meta', 'global_custom_scripts'];
     
     $settings = [];
     foreach ($allowedKeys as $key) {

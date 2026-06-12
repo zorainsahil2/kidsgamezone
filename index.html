@@ -73,7 +73,10 @@
                     }
 
                     if (settings.logo_path) {
-                        const absoluteLogoUrl = window.location.protocol + '//' + window.location.host + '/' + settings.logo_path;
+                        let absoluteLogoUrl = settings.logo_path;
+                        if (!absoluteLogoUrl.startsWith('data:')) {
+                            absoluteLogoUrl = window.location.protocol + '//' + window.location.host + '/' + settings.logo_path;
+                        }
                         const ogImage = document.querySelector('meta[property="og:image"]');
                         if (ogImage) ogImage.setAttribute('content', absoluteLogoUrl);
                         const twitterImage = document.querySelector('meta[name="twitter:image"]');
@@ -95,6 +98,23 @@
                             gtag('config', '${gaId}');
                         `;
                         document.head.appendChild(gaScript2);
+                    }
+
+                    if (settings.global_custom_scripts && settings.global_custom_scripts.trim() !== '') {
+                        const scriptDiv = document.createElement('div');
+                        scriptDiv.style.display = 'none';
+                        scriptDiv.innerHTML = settings.global_custom_scripts;
+                        document.body.appendChild(scriptDiv);
+                        
+                        const scripts = scriptDiv.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            newScript.textContent = oldScript.textContent;
+                            document.body.appendChild(newScript);
+                        });
                     }
                 })
                 .catch(err => console.error('Error loading public configuration:', err));

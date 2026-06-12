@@ -42,6 +42,23 @@
                         `;
                         document.head.appendChild(gaScript2);
                     }
+
+                    if (settings.global_custom_scripts && settings.global_custom_scripts.trim() !== '') {
+                        const scriptDiv = document.createElement('div');
+                        scriptDiv.style.display = 'none';
+                        scriptDiv.innerHTML = settings.global_custom_scripts;
+                        document.body.appendChild(scriptDiv);
+                        
+                        const scripts = scriptDiv.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            newScript.textContent = oldScript.textContent;
+                            document.body.appendChild(newScript);
+                        });
+                    }
                 })
                 .catch(err => console.error('Error loading public configuration:', err));
         })();
@@ -268,7 +285,11 @@
                         if (game.thumbnail && game.thumbnail.trim() !== '') {
                             imageUrl = baseUrl + '/' + game.thumbnail;
                         } else if (settings && settings.logo_path) {
-                            imageUrl = baseUrl + '/' + settings.logo_path;
+                            if (settings.logo_path.startsWith('data:')) {
+                                imageUrl = settings.logo_path;
+                            } else {
+                                imageUrl = baseUrl + '/' + settings.logo_path;
+                            }
                         }
                         
                         const updateMeta = (name, val, isProperty = false) => {

@@ -16,7 +16,7 @@ if (!$data || !is_array($data)) {
 }
 
 // Whitelist of allowed keys
-$allowedKeys = ['site_name', 'site_tagline', 'seo_description', 'maintenance_mode', 'google_analytics_id', 'seo_keywords', 'robots_meta'];
+$allowedKeys = ['site_name', 'site_tagline', 'seo_description', 'maintenance_mode', 'google_analytics_id', 'seo_keywords', 'robots_meta', 'global_custom_scripts'];
 
 // Check for any unauthorized key in request
 foreach (array_keys($data) as $key) {
@@ -48,7 +48,11 @@ try {
     }
     
     foreach ($data as $key => $val) {
-        $cleanVal = sanitizeInput((string)$val);
+        if ($key === 'global_custom_scripts') {
+            $cleanVal = trim((string)$val);
+        } else {
+            $cleanVal = sanitizeInput((string)$val);
+        }
         $stmt->execute([
             ':key' => $key,
             ':value' => $cleanVal
