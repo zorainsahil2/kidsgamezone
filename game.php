@@ -123,7 +123,7 @@ try {
     
     <!-- Ad and Core Scripts -->
     <script>
-        window.adSlotsConfig = <?php echo json_encode($slots, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+        window.adSlotsConfig = <?php echo json_encode($slots, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
     </script>
     <script src="assets/js/ads.js" defer></script>
     <script src="assets/js/game-loader.js" defer></script>
