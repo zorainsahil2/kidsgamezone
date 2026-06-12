@@ -8,7 +8,7 @@
   },
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/admin", "dest": "/api/index.php?path=admin/index.php" },
+    { "src": "/admin", "status": 308, "headers": { "Location": "/admin/" } },
     { "src": "/admin/(.*)", "dest": "/api/index.php?path=admin/$1" },
     { "src": "/(.*\\.php)", "dest": "/api/index.php?path=$1" },
     { "src": "/(.*)", "dest": "/$1" }

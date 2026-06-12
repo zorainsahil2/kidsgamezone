@@ -55,20 +55,27 @@ if (empty($username) || empty($password)) {
     ], 400);
 }
 
-if (loginAdmin($username, $password)) {
-    // Clear failed login attempts on successful login
-    unset($_SESSION['failed_logins']);
-    
-    jsonResponse([
-        'success' => true,
-        'redirect' => 'dashboard.php'
-    ]);
-} else {
-    // Track failed login attempt
-    $_SESSION['failed_logins'][] = time();
-    
+try {
+    if (loginAdmin($username, $password)) {
+        // Clear failed login attempts on successful login
+        unset($_SESSION['failed_logins']);
+        
+        jsonResponse([
+            'success' => true,
+            'redirect' => 'dashboard.php'
+        ]);
+    } else {
+        // Track failed login attempt
+        $_SESSION['failed_logins'][] = time();
+        
+        jsonResponse([
+            'success' => false,
+            'message' => 'Invalid username or password'
+        ], 401);
+    }
+} catch (Exception $e) {
     jsonResponse([
         'success' => false,
-        'message' => 'Invalid username or password'
-    ], 401);
+        'message' => 'Database connection or query error: ' . $e->getMessage()
+    ], 500);
 }

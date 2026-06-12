@@ -97,7 +97,7 @@ function loginAdmin($username, $password) {
             return true;
         }
     } catch (PDOException $e) {
-        // Fail silently or handle error gracefully in calling script
+        throw new Exception("Database error in loginAdmin: " . $e->getMessage(), 0, $e);
     }
     
     return false;
