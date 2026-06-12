@@ -74,10 +74,10 @@ class DB {
                 $checkSettings->execute();
                 $scriptsVal = $checkSettings->fetchColumn();
                 
-                // If global_custom_scripts is empty, update it with Adsterra Popunder & Social Bar
-                if (empty($scriptsVal)) {
-                    $adsterraGlobal = '<script src="https://pl29724608.effectivecpmnetwork.com/b0/6c/e4/b06ce4e7c54652a4e92ed61b8ebfe5ad.js"></script>' . "\n" .
-                                      '<script src="https://pl29724609.effectivecpmnetwork.com/d4/f1/83/d4f1839cdd1a80fbe888a9efb184da05.js"></script>';
+                // If global_custom_scripts is empty or does not contain async/defer, update it with Adsterra Popunder & Social Bar
+                $adsterraGlobal = '<script src="https://pl29724608.effectivecpmnetwork.com/b0/6c/e4/b06ce4e7c54652a4e92ed61b8ebfe5ad.js" async defer></script>' . "\n" .
+                                  '<script src="https://pl29724609.effectivecpmnetwork.com/d4/f1/83/d4f1839cdd1a80fbe888a9efb184da05.js" async defer></script>';
+                if (empty($scriptsVal) || ($scriptsVal !== $adsterraGlobal && strpos($scriptsVal, 'pl29724608') !== false && strpos($scriptsVal, 'async defer') === false)) {
                     $driver = self::$instance->getAttribute(PDO::ATTR_DRIVER_NAME);
                     if ($driver === 'pgsql') {
                         $upSettings = self::$instance->prepare("INSERT INTO site_settings (setting_key, setting_value) VALUES ('global_custom_scripts', :value) ON CONFLICT (setting_key) DO UPDATE SET setting_value = EXCLUDED.setting_value");

@@ -145,7 +145,13 @@ try {
     </header>
 
     <!-- Top Leaderboard Ad Slot -->
-    <div id="header_banner" class="ad-slot ad-slot--header"></div>
+    <div id="header_banner" class="ad-slot ad-slot--header">
+        <?php
+        if (isset($slots['header_banner']) && $slots['header_banner']['is_active']) {
+            echo $slots['header_banner']['ad_code'];
+        }
+        ?>
+    </div>
 
     <!-- Breadcrumb Indicator -->
     <div class="breadcrumb-container">
@@ -163,7 +169,13 @@ try {
         
         <!-- Left Sidebar Ad -->
         <aside class="portal-sidebar">
-            <div id="sidebar_left" class="ad-slot ad-slot--sidebar"></div>
+            <div id="sidebar_left" class="ad-slot ad-slot--sidebar">
+                <?php
+                if (isset($slots['sidebar_left']) && $slots['sidebar_left']['is_active']) {
+                    echo $slots['sidebar_left']['ad_code'];
+                }
+                ?>
+            </div>
         </aside>
 
         <!-- Main Frame Body -->
@@ -222,13 +234,25 @@ try {
 
         <!-- Right Sidebar Ad -->
         <aside class="portal-sidebar">
-            <div id="sidebar_right" class="ad-slot ad-slot--sidebar"></div>
+            <div id="sidebar_right" class="ad-slot ad-slot--sidebar">
+                <?php
+                if (isset($slots['sidebar_right']) && $slots['sidebar_right']['is_active']) {
+                    echo $slots['sidebar_right']['ad_code'];
+                }
+                ?>
+            </div>
         </aside>
 
     </div>
 
     <!-- Bottom Leaderboard Ad Slot -->
-    <div id="footer_banner" class="ad-slot ad-slot--footer"></div>
+    <div id="footer_banner" class="ad-slot ad-slot--footer">
+        <?php
+        if (isset($slots['footer_banner']) && $slots['footer_banner']['is_active']) {
+            echo $slots['footer_banner']['ad_code'];
+        }
+        ?>
+    </div>
 
     <!-- Footer Agreement Links -->
     <footer class="portal-footer">

@@ -54,13 +54,15 @@ const AdsManager = {
     }
   },
 
-  /**
-   * Inject all standard active banner slots
-   */
   injectAll() {
+    // Banner ads are now rendered server-side in the main HTML.
+    // We only track their impressions here.
     const bannerSlots = ['header_banner', 'sidebar_left', 'sidebar_right', 'footer_banner'];
     bannerSlots.forEach(slotName => {
-      this.inject(slotName);
+      const targetDiv = document.getElementById(slotName);
+      if (targetDiv && this.slots[slotName]) {
+        this.trackEvent('ad_impression', null, slotName);
+      }
     });
   },
 
