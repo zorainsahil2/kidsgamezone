@@ -34,16 +34,31 @@ function loadGame(gameSlug, gameId, gamePath) {
 function loadGameIframe(gamePath) {
   const container = document.getElementById('game-iframe-container');
   if (container) {
-    container.innerHTML = `
-      <iframe 
-        src="${gamePath}" 
-        width="100%" 
-        height="600px" 
-        frameborder="0" 
-        allowfullscreen 
-        style="border: 4px solid #2D3748; border-radius: 16px; box-shadow: 0 8px 0px #2D3748; background-color: #FFFFFF;"
-      ></iframe>
-    `;
+    container.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = gamePath;
+    iframe.width = "100%";
+    iframe.height = "600px";
+    iframe.frameBorder = "0";
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.style.border = '4px solid #2D3748';
+    iframe.style.borderRadius = '16px';
+    iframe.style.boxShadow = '0 8px 0px #2D3748';
+    iframe.style.backgroundColor = '#FFFFFF';
+    
+    // Hide spinner once iframe is loaded
+    iframe.addEventListener('load', () => {
+      const spinner = document.getElementById('iframe-spinner');
+      if (spinner) {
+        spinner.style.transition = 'opacity 0.3s ease';
+        spinner.style.opacity = '0';
+        setTimeout(() => {
+          spinner.style.display = 'none';
+        }, 300);
+      }
+    });
+    
+    container.appendChild(iframe);
   } else {
     console.error('Game Loader: Target container #game-iframe-container not found on page.');
   }

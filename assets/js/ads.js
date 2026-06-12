@@ -9,7 +9,18 @@ const AdsManager = {
    */
   async init() {
     // 1. Read inline config if present
-    if (typeof window !== 'undefined' && window.preRollAdCode !== undefined && window.preRollAdCode !== null) {
+    if (typeof window !== 'undefined' && window.adSlotsConfig !== undefined && window.adSlotsConfig !== null) {
+      if (Array.isArray(window.adSlotsConfig)) {
+        window.adSlotsConfig.forEach(slot => {
+          this.slots[slot.slot_name] = slot;
+        });
+      } else {
+        this.slots = window.adSlotsConfig;
+      }
+      // Inject standard banner slots
+      this.injectAll();
+      return;
+    } else if (typeof window !== 'undefined' && window.preRollAdCode !== undefined && window.preRollAdCode !== null) {
       this.slots['pre_roll'] = {
         slot_name: 'pre_roll',
         ad_code: window.preRollAdCode,

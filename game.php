@@ -123,9 +123,7 @@ try {
     
     <!-- Ad and Core Scripts -->
     <script>
-        // Inline Pre-Roll Configs for AdsManager
-        window.preRollAdCode = <?php echo json_encode($slots['pre_roll']['ad_code'] ?? ''); ?>;
-        window.preRollSkipSeconds = <?php echo json_encode((int)($slots['pre_roll']['skip_after_seconds'] ?? 5)); ?>;
+        window.adSlotsConfig = <?php echo json_encode($slots, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
     </script>
     <script src="assets/js/ads.js" defer></script>
     <script src="assets/js/game-loader.js" defer></script>
@@ -147,13 +145,7 @@ try {
     </header>
 
     <!-- Top Leaderboard Ad Slot -->
-    <div id="header_banner" class="ad-slot ad-slot--header">
-        <?php
-        if (isset($slots['header_banner'])) {
-            echo $slots['header_banner']['ad_code'];
-        }
-        ?>
-    </div>
+    <div id="header_banner" class="ad-slot ad-slot--header"></div>
 
     <!-- Breadcrumb Indicator -->
     <div class="breadcrumb-container">
@@ -171,13 +163,7 @@ try {
         
         <!-- Left Sidebar Ad -->
         <aside class="portal-sidebar">
-            <div id="sidebar_left" class="ad-slot ad-slot--sidebar">
-                <?php
-                if (isset($slots['sidebar_left'])) {
-                    echo $slots['sidebar_left']['ad_code'];
-                }
-                ?>
-            </div>
+            <div id="sidebar_left" class="ad-slot ad-slot--sidebar"></div>
         </aside>
 
         <!-- Main Frame Body -->
@@ -236,25 +222,13 @@ try {
 
         <!-- Right Sidebar Ad -->
         <aside class="portal-sidebar">
-            <div id="sidebar_right" class="ad-slot ad-slot--sidebar">
-                <?php
-                if (isset($slots['sidebar_right'])) {
-                    echo $slots['sidebar_right']['ad_code'];
-                }
-                ?>
-            </div>
+            <div id="sidebar_right" class="ad-slot ad-slot--sidebar"></div>
         </aside>
 
     </div>
 
     <!-- Bottom Leaderboard Ad Slot -->
-    <div id="footer_banner" class="ad-slot ad-slot--footer">
-        <?php
-        if (isset($slots['footer_banner'])) {
-            echo $slots['footer_banner']['ad_code'];
-        }
-        ?>
-    </div>
+    <div id="footer_banner" class="ad-slot ad-slot--footer"></div>
 
     <!-- Footer Agreement Links -->
     <footer class="portal-footer">
@@ -315,19 +289,37 @@ try {
                 })
                 .catch(err => console.error(err));
 
-            // 3. Bind MutationObserver to hide spinner loader once iframe is successfully injected and loaded
+            // 3. Bind load checker and MutationObserver to hide spinner loader once iframe is successfully injected and loaded
             const iframeContainer = document.getElementById('game-iframe-container');
+            const handleIframeLoad = () => {
+                const spinner = document.getElementById('iframe-spinner');
+                if (spinner) {
+                    spinner.style.transition = 'opacity 0.3s ease';
+                    spinner.style.opacity = '0';
+                    setTimeout(() => {
+                        spinner.style.display = 'none';
+                    }, 300);
+                }
+            };
+
+            // Check if iframe is already present (sync load fallback)
+            const existingIframe = iframeContainer.querySelector('iframe');
+            if (existingIframe) {
+                if (existingIframe.contentDocument && existingIframe.contentDocument.readyState === 'complete') {
+                    handleIframeLoad();
+                } else {
+                    existingIframe.addEventListener('load', handleIframeLoad);
+                }
+            }
+
             const observer = new MutationObserver((mutations) => {
                 const iframe = iframeContainer.querySelector('iframe');
                 if (iframe) {
-                    iframe.addEventListener('load', () => {
-                        const spinner = document.getElementById('iframe-spinner');
-                        if (spinner) {
-                            spinner.style.transition = 'opacity 0.3s ease';
-                            spinner.style.opacity = '0';
-                            setTimeout(() => spinner.style.display = 'none', 300);
-                        }
-                    });
+                    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                        handleIframeLoad();
+                    } else {
+                        iframe.addEventListener('load', handleIframeLoad);
+                    }
                     observer.disconnect();
                 }
             });
