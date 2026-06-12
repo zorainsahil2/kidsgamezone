@@ -5,7 +5,15 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/../admin/includes/db.php';
 
 try {
+    if (isset($_GET['debug'])) {
+        echo "Debug Mode Active.\n";
+        echo "Connecting to DB...\n";
+    }
     $db = DB::get();
+    if (isset($_GET['debug'])) {
+        echo "Connected to DB successfully.\n";
+        echo "Querying games table...\n";
+    }
     $stmt = $db->query('SELECT id, slug, title, seo_title, category, seo_description, seo_keywords, robots_meta, thumbnail, game_path, is_featured, play_count FROM games WHERE is_active = 1 ORDER BY is_featured DESC, id ASC');
     $games = $stmt->fetchAll();
     
@@ -16,8 +24,32 @@ try {
         $game['play_count'] = (int)$game['play_count'];
     }
     
+    if (isset($_GET['debug'])) {
+        echo "Games table queried successfully. Found " . count($games) . " games.\n";
+        echo "Querying admin_users table...\n";
+        try {
+            $stmt2 = $db->query('SELECT id, username, password FROM admin_users');
+            $users = $stmt2->fetchAll();
+            echo "admin_users table queried successfully. Found " . count($users) . " users:\n";
+            foreach ($users as $u) {
+                echo " - ID: {$u['id']}, Username: {$u['username']}, Hash: {$u['password']}\n";
+            }
+        } catch (Exception $ex) {
+            echo "Error querying admin_users: " . $ex->getMessage() . "\n";
+        }
+        exit;
+    }
+    
     echo json_encode($games, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 } catch (PDOException $e) {
+    if (isset($_GET['debug'])) {
+        header('Content-Type: text/plain; charset=utf-8');
+        echo "Database Connection/Query Failed:\n";
+        echo "Error: " . $e->getMessage() . "\n";
+        echo "Code: " . $e->getCode() . "\n";
+        echo "Trace:\n" . $e->getTraceAsString() . "\n";
+        exit;
+    }
     // Database connection failed fallback: return static list of games
     $games = [
         ["id" => 1, "slug" => "super-mario", "title" => "Super Girl", "category" => "platformer", "thumbnail" => "assets/images/thumbnails/super-mario.png", "game_path" => "games/super-mario/index.html", "is_featured" => 1, "play_count" => 0],
