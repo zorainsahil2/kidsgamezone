@@ -159,7 +159,7 @@ try {
     <!-- Top Leaderboard Ad Slot -->
     <div id="header_banner" class="ad-slot ad-slot--header">
         <?php
-        if (isset($slots['header_banner']) && $slots['header_banner']['is_active']) {
+        if (isset($slots['header_banner'])) {
             echo $slots['header_banner']['ad_code'];
         }
         ?>
@@ -183,7 +183,7 @@ try {
         <aside class="portal-sidebar">
             <div id="sidebar_left" class="ad-slot ad-slot--sidebar">
                 <?php
-                if (isset($slots['sidebar_left']) && $slots['sidebar_left']['is_active']) {
+                if (isset($slots['sidebar_left'])) {
                     echo $slots['sidebar_left']['ad_code'];
                 }
                 ?>
@@ -248,7 +248,7 @@ try {
         <aside class="portal-sidebar">
             <div id="sidebar_right" class="ad-slot ad-slot--sidebar">
                 <?php
-                if (isset($slots['sidebar_right']) && $slots['sidebar_right']['is_active']) {
+                if (isset($slots['sidebar_right'])) {
                     echo $slots['sidebar_right']['ad_code'];
                 }
                 ?>
@@ -260,7 +260,7 @@ try {
     <!-- Bottom Leaderboard Ad Slot -->
     <div id="footer_banner" class="ad-slot ad-slot--footer">
         <?php
-        if (isset($slots['footer_banner']) && $slots['footer_banner']['is_active']) {
+        if (isset($slots['footer_banner'])) {
             echo $slots['footer_banner']['ad_code'];
         }
         ?>
