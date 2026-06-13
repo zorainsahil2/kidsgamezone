@@ -37,6 +37,9 @@ try {
         'logo_path' => $settingsRows['logo_path'] ?? '',
         'google_analytics_id' => $settingsRows['google_analytics_id'] ?? '',
         'global_custom_scripts' => $settingsRows['global_custom_scripts'] ?? '',
+        'custom_popunder' => $settingsRows['custom_popunder'] ?? '',
+        'custom_smartlink' => $settingsRows['custom_smartlink'] ?? '',
+        'referral_banner' => $settingsRows['referral_banner'] ?? '',
         'maintenance_mode' => $settingsRows['maintenance_mode'] ?? '0'
     ];
     
@@ -53,6 +56,11 @@ try {
         $slots[$row['slot_name']] = $row;
     }
     
+    // Dynamically inject custom Smartlink into pre-roll ad button if set
+    if (isset($slots['pre_roll']) && !empty($settings['custom_smartlink'])) {
+        $slots['pre_roll']['ad_code'] = preg_replace('/href="[^"]+"/', 'href="' . htmlspecialchars($settings['custom_smartlink']) . '"', $slots['pre_roll']['ad_code']);
+    }
+    
     // Determine dynamic SEO parameters
     $resolvedTitle = (!empty($game['seo_title'])) ? $game['seo_title'] : "Playing " . $game['title'] . " — " . $settings['site_name'];
     $resolvedDesc = (!empty($game['seo_description'])) ? $game['seo_description'] : $settings['seo_description'];
@@ -67,6 +75,10 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Popunder / Custom Script -->
+    <?php if (!empty($settings['custom_popunder'])): ?>
+        <?php echo $settings['custom_popunder']; ?>
+    <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Google Analytics (gtag.js) -->
@@ -253,6 +265,13 @@ try {
         }
         ?>
     </div>
+
+    <!-- Referral / Affiliate Banner -->
+    <?php if (!empty($settings['referral_banner'])): ?>
+        <div class="referral-banner-container" style="text-align: center; margin: 30px auto; max-width: 728px; padding: 0 15px;">
+            <?php echo $settings['referral_banner']; ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Footer Agreement Links -->
     <footer class="portal-footer">

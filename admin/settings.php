@@ -681,9 +681,35 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                 </div>
                 <div class="form-row" style="margin-top: 20px;">
                     <div class="form-group">
-                        <label for="globalScriptsInput">Global Integration Scripts (e.g. Adsterra Popunder / Social Bar)</label>
+                        <label for="globalScriptsInput">Global Integration Scripts (e.g. Popunder / Social Bar)</label>
                         <textarea id="globalScriptsInput" style="height: 120px;" placeholder="Paste custom global scripts here (e.g., Popunder, Social Bar, global headers/footers)..."></textarea>
                         <small class="form-help">Any scripts added here will be executed globally across the portal home and play pages. Wrap script code in &lt;script&gt; tags.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3b: Popunder, Smartlink & Affiliate Settings -->
+            <div class="settings-card">
+                <h3>Popunder, Smartlink & Affiliate Settings</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customPopunderInput">Popunder / Custom Script Code</label>
+                        <textarea id="customPopunderInput" style="height: 100px;" placeholder="Paste popunder or custom JS tag here (e.g. <script src='https://...'></script>)..."></textarea>
+                        <small class="form-help">Any script added here will be injected into the head of the home page and game pages. Works with any ad network (Adsterra, Monetag, PropellerAds, AdSense, etc.).</small>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="customSmartlinkInput">Direct Ad / Smartlink URL</label>
+                        <input type="text" id="customSmartlinkInput" placeholder="Paste direct link or Smartlink URL here (e.g. https://...)">
+                        <small class="form-help">This URL will be dynamically integrated into the game pre-roll reward link. Works with any ad network.</small>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="referralBannerInput">Affiliate / Referral Banner HTML Code</label>
+                        <textarea id="referralBannerInput" style="height: 100px;" placeholder="Paste banner image anchor HTML here (e.g. <a href='...'><img src='...' /></a>)..."></textarea>
+                        <small class="form-help">This banner will be displayed at the bottom of the portal home and game play pages, centered above the footer. Works with any referral/affiliate network banner.</small>
                     </div>
                 </div>
             </div>
@@ -909,6 +935,9 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                     updateGaPreview();
 
                     document.getElementById('globalScriptsInput').value = settings.global_custom_scripts || '';
+                    document.getElementById('customPopunderInput').value = settings.custom_popunder || '';
+                    document.getElementById('customSmartlinkInput').value = settings.custom_smartlink || '';
+                    document.getElementById('referralBannerInput').value = settings.referral_banner || '';
 
                     const isMaint = (settings.maintenance_mode === '1');
                     document.getElementById('maintenanceToggle').checked = isMaint;
@@ -1045,6 +1074,9 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
             const seo_keywords = document.getElementById('seoKeywordsInput').value.trim();
             const robots_meta = document.getElementById('robotsPolicySelect').value;
             const global_custom_scripts = document.getElementById('globalScriptsInput').value;
+            const custom_popunder = document.getElementById('customPopunderInput').value;
+            const custom_smartlink = document.getElementById('customSmartlinkInput').value.trim();
+            const referral_banner = document.getElementById('referralBannerInput').value;
 
             showLoader(true, 'Saving Settings...');
 
@@ -1062,7 +1094,10 @@ $adminUsername = isset($_SESSION['admin_username']) ? sanitizeInput($_SESSION['a
                     maintenance_mode,
                     seo_keywords,
                     robots_meta,
-                    global_custom_scripts
+                    global_custom_scripts,
+                    custom_popunder,
+                    custom_smartlink,
+                    referral_banner
                 })
             })
             .then(res => {

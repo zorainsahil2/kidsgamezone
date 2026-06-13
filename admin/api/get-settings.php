@@ -10,7 +10,7 @@ try {
     $stmt = $db->query('SELECT setting_key, setting_value FROM site_settings');
     $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     
-    $keys = ['site_name', 'site_tagline', 'seo_description', 'maintenance_mode', 'google_analytics_id', 'logo_path', 'seo_keywords', 'robots_meta', 'global_custom_scripts'];
+    $keys = ['site_name', 'site_tagline', 'seo_description', 'maintenance_mode', 'google_analytics_id', 'logo_path', 'seo_keywords', 'robots_meta', 'global_custom_scripts', 'custom_popunder', 'custom_smartlink', 'referral_banner'];
     $settings = [];
     foreach ($keys as $key) {
         $settings[$key] = isset($rows[$key]) ? $rows[$key] : '';
